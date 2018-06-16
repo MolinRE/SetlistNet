@@ -40,7 +40,7 @@ if (setlists.Count > 0)
 	}
 
 	// You can also use this method for text representation of the setlist
-	Helpers.SetlistToText(setlists[0]);
+	Util.SetlistToText(setlists[0]);
 }
 ```
 
@@ -71,8 +71,8 @@ Same here. If you want to search for artists (or anything else, because it works
 
 ### Internationalization
 
-This feature listed as "expiremental" by official documentation and doen not work for all cties.
-However, for the rest of it, you can get localized cities and countries names. The default language is English (en), but you can provide any of the languages Spanish (es), French (fr), German (de), Portuguese (pt), Turkish (tr), Italian (it) or Polish (pl).
+This feature listed as "expiremental" by official documentation and does not work for all cities.
+However, for the rest of it, you can get localized cities and countries names. The default language is English (`en`), but you can provide any of the languages Spanish (`es`), French (`fr`), German (`de`), Portuguese (`pt`), Turkish (`tr`), Italian (`it`) or Polish (`pl`).
 
 ```csharp
 SetlistApi api = new SetlistApi(apiKey, "en");
@@ -91,9 +91,8 @@ More examples coming soon...
 
 ## Installation
 
-Download the repo from [here](https://bitbucket.org/new_omega/setlistfmapi-net/downloads) and add it to project references.
+Download the repo and add it to the project references. NuGet coming soon.
 
 ## Tests
 
-**SetlistfmApiUnitTests** contains a few tests. You can use them make sure API works fine.
-Though, currently it supports only methods that return single object, like Artist or City.
+Coming soon.
