@@ -64,7 +64,7 @@ namespace SetlistNet
                     query.AppendFormat("artistName={0}&", searchFields.Name);
             }
 
-            string url = string.Format("/search/artists?{0}p={1}", query.ToString(), page.ToString());
+            string url = string.Format("/search/artists?{0}sort=relevance&p={1}", query.ToString(), page.ToString());
             Artists artists = Load<Artists>(url);
 
             return artists;
