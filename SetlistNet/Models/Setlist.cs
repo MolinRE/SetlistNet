@@ -217,6 +217,7 @@ namespace SetlistNet.Models
 
         [JsonExtensionData]
         private IDictionary<string, JToken> _additionalData;
+
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {

@@ -9,8 +9,16 @@ namespace SetlistNet
     {
         public static string SetlistToText(Setlist setlist, bool useHtml = true)
         {
-            StringBuilder text = new StringBuilder();
-            text.AppendFormat("<a href=\"{0}\">{1}</a> @ {2} ({3}, {4}), {5}\r\n", setlist.Artist.UrlStats, setlist.Artist.Name, setlist.Venue.Name, setlist.Venue.City.Name, setlist.Venue.City.Country.Code, setlist.GetEventDateTime("dd.MM.yy"));
+            var text = new StringBuilder();
+            var venue = setlist.Venue;
+            //text.AppendFormat("<a href=\"{0}\">{1}</a> @ {2} ({3}, {4}), {5}\r\n", setlist.Artist.UrlStats, setlist.Artist.Name, setlist.Venue.Name, setlist.Venue.City.Name, setlist.Venue.City.Country.Code, setlist.GetEventDateTime("dd.MM.yy"));
+            text.AppendLine($"[{setlist.GetEventDateTime("MMM dd yyyy")}] {TagHelper.Href(setlist.Artist.UrlStats, setlist.Artist.Name)} setlist");
+            text.AppendLine($"at {TagHelper.Href(venue.Url, $"{venue.Name}, {venue.City.Name}, {venue.City.Country.Name}")}");
+            if (!string.IsNullOrEmpty(setlist.TourName))
+            {
+                text.AppendLine($"Tour: {setlist.Tour.Name}");
+            }
+
             int count = 0;
             foreach (Set set in setlist.Sets)
             {
@@ -34,10 +42,10 @@ namespace SetlistNet
                     text.AppendFormat("{0}. {1}", ++count, song.Name.Trim() == "" ? "Unknown" : song.Name);
                     if (song.Cover != null || song.With != null)
                     {
-                        text.Append(" (<i>");
+                        text.Append(" (");
                         if (song.Cover != null)
                         {
-                            text.AppendFormat("{0} cover", song.Cover.Name);
+                            text.AppendFormat("<i>{0}</i> cover", song.Cover.Name);
                             if (song.With != null)
                                 text.AppendFormat(" w/ {0}", song.With.Name);
                         }
@@ -45,29 +53,64 @@ namespace SetlistNet
                             if (song.With != null)
                             text.AppendFormat("w/ {0}", song.With.Name);
 
-                        text.Append("</i>)");
+                        text.Append(")");
                     }
                     if (!string.IsNullOrEmpty(song.Info))
-                        text.AppendFormat(", {0}.", song.Info);
+                    {
+                        text.AppendFormat(" ({0})", song.Info);
+                    }
                     text.AppendLine();
                 }
             }
+
+            if (!string.IsNullOrEmpty(setlist.Info))
+            {
+                text.AppendLine();
+                text.AppendLine($"<b>Note</b>: {setlist.Info}");
+            }
+
             return text.ToString();
         }
 
         public static string SetlistsToText(Setlists setlists, int count = 7, bool useHtml = true)
         {
-            StringBuilder text = new StringBuilder();
+            var text = new StringBuilder();
             foreach (Setlist setlist in setlists.Take(count))
             {
                 text.AppendFormat("[{0:dd.MM.yyyy}, {2}] {1}, {3}.",
                     setlist.GetEventDateTime(), setlist.Venue.City.Name, setlist.Venue.City.Country.Code, setlist.Venue.Name);
                 if (!string.IsNullOrEmpty(setlist.TourName))
-                    text.AppendFormat(" ({0})", setlist.Tour);
+                {
+                    text.AppendFormat(" ({0} tour)", setlist.Tour.Name);
+                }
                 if (!string.IsNullOrEmpty(setlist.Info))
-                    text.AppendFormat(". {0}", setlist.Info);
-                text.Append("\r\n");
+                {
+                    text.AppendFormat(". Note: {0}", setlist.Info);
+                }
+                text.AppendLine();
             }
+
+            return text.ToString();
+        }
+
+        public static string SetlistsToTextHtml(Setlists setlists, int count = 7, bool useHtml = true)
+        {
+            var text = new StringBuilder();
+            int year = DateTime.Now.Year;
+            foreach (Setlist setlist in setlists.Take(count))
+            {
+                var date = setlist.GetEventDateTime();
+                if (date.HasValue && date.Value.Year != year)
+                {
+                    year = date.Value.Year;
+                    text.AppendLine($"<b>{year}</b>:");
+                }
+
+                text.AppendFormat("[{0:dd.MM}] {1} {2}.",
+                    setlist.GetEventDateTime(), setlist.Venue.City.Name, setlist.Venue.City.Country.Code, setlist.Venue.Name);
+                text.AppendLine();
+            }
+
             return text.ToString();
         }
 
