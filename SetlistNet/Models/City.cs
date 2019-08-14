@@ -9,7 +9,7 @@ namespace SetlistNet.Models
     public class City
     {
         #region Private Fields
-        private int _id;
+        private string _id;
         private string _name;
         private string _state;
         private string _stateCode;
@@ -20,10 +20,11 @@ namespace SetlistNet.Models
         #region Properties
         /// <summary>
         /// Gets or sets unique identifier.
-        /// <para>This is <code>geoNameId</code> property in <see cref="http://geonames.org"/>.</para>
+        /// <para>This is <code>geoNameId</code> property in <see cref="http://geonames.org"/>.
+        /// Setlist.fm API returns <code>cu:aa1a96e1-06c7-11e6-b736-22000bb3106b</code> for <code>id=3d59d97</code>, so switching to int temporarily.</para>
         /// </summary>
         [JsonProperty(PropertyName = "id")]
-        public int Id
+        public string Id
         {
             get
             {
@@ -133,7 +134,7 @@ namespace SetlistNet.Models
         public City(int geoNamesId)
             : this()
         {
-            Id = geoNamesId;
+            Id = geoNamesId.ToString();
         }
 
         public City(string name)

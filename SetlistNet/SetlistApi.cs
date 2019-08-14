@@ -164,7 +164,7 @@ namespace SetlistNet
 
                     if (searchFields.Venue.City != null)
                     {
-                        if (searchFields.Venue.City.Id != 0)
+                        if (searchFields.Venue.City.Id != "0" && searchFields.Venue.City.Id != "")
                             query.AppendFormat("cityId={0}&", searchFields.Venue.City.Id);
                         if (!string.IsNullOrEmpty(searchFields.Venue.City.Name))
                             query.AppendFormat("cityName={0}&", searchFields.Venue.City.Name);
@@ -208,7 +208,7 @@ namespace SetlistNet
 
                 if (searchFields.City != null)
                 {
-                    if (searchFields.City.Id != 0)
+                    if (searchFields.City.Id != "0" && searchFields.City.Id != "")
                         query.AppendFormat("cityId={0}&", searchFields.City.Id);
                     if (!string.IsNullOrEmpty(searchFields.City.Name))
                         query.AppendFormat("cityName={0}&", searchFields.City.Name);
@@ -335,7 +335,10 @@ namespace SetlistNet
                 value = sr.ReadToEnd();
             }
 
-            var result = JsonConvert.DeserializeObject<T>(value);
+            var result = JsonConvert.DeserializeObject<T>(value, new JsonSerializerSettings()
+            {
+                
+            });
             return result;
         }
     }
