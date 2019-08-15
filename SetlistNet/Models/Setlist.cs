@@ -253,6 +253,15 @@ namespace SetlistNet.Models
                 return "";
         }
 
+        public string GetEventDateTime(string format, IFormatProvider provider)
+        {
+            DateTime result;
+            if (DateTime.TryParse(EventDate, out result))
+                return result.ToString(format, provider);
+            else
+                return "";
+        }
+
         public void SetEventDateTime(DateTime dt)
         {
             EventDate = dt.ToString("dd-MM-yyyy");

@@ -1,5 +1,6 @@
 ﻿using SetlistNet.Models;
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -12,7 +13,7 @@ namespace SetlistNet
             var text = new StringBuilder();
             var venue = setlist.Venue;
             //text.AppendFormat("<a href=\"{0}\">{1}</a> @ {2} ({3}, {4}), {5}\r\n", setlist.Artist.UrlStats, setlist.Artist.Name, setlist.Venue.Name, setlist.Venue.City.Name, setlist.Venue.City.Country.Code, setlist.GetEventDateTime("dd.MM.yy"));
-            text.AppendLine($"[{setlist.GetEventDateTime("MMM dd yyyy")}] {TagHelper.Href(setlist.Artist.UrlStats, setlist.Artist.Name)} setlist");
+            text.AppendLine($"[{setlist.GetEventDateTime("MMM dd yyyy", CultureInfo.GetCultureInfo("en-US"))}] {TagHelper.Href(setlist.Artist.UrlStats, setlist.Artist.Name)} setlist");
             text.AppendLine($"at {TagHelper.Href(venue.Url, $"{venue.Name}, {venue.City.Name}, {venue.City.Country.Name}")}");
             if (!string.IsNullOrEmpty(setlist.TourName))
             {
