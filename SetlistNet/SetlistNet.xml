@@ -440,5 +440,13 @@
             <param name="page">Page number to fetch.</param>
             <returns>A list of setlists.</returns>
         </member>
+        <member name="M:SetlistNet.Util.SetlistToText(SetlistNet.Models.Setlist,System.Boolean)">
+            <summary>
+            Converts given setlist to text view. Use this method to get text representation of the setlist.
+            </summary>
+            <param name="setlist">The setlist to represent.</param>
+            <param name="useHtml">Whether or not to use HTML-code to add little extra beauty.</param>
+            <returns>Text representation of the setlist</returns>
+        </member>
     </members>
 </doc>
