@@ -1,7 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <Authors>new_omega</Authors>
+    <Description>C# library to interact with setlist.fm API. It's currently supports all methods listed in the API REST Endpoints section, such as Setlists Search or getting Artist by MBID.</Description>
+    <Copyright>Konstantin Komarov</Copyright>
+    <RepositoryUrl>https://github.com/MolinRE/SetlistNet</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>setlist.fm, setlist, concerts, shows, live</PackageTags>
+    <NeutralLanguage>en</NeutralLanguage>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Users\Konstantin\source\git\SetlistNet\SetlistNet\SetlistNet.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

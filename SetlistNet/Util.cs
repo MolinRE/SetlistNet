@@ -8,11 +8,16 @@ namespace SetlistNet
 {
     public static class Util
     {
+        /// <summary>
+        /// Converts given setlist to text view. Use this method to get text representation of the setlist.
+        /// </summary>
+        /// <param name="setlist">The setlist to represent.</param>
+        /// <param name="useHtml">Whether or not to use HTML-code to add little extra beauty.</param>
+        /// <returns>Text representation of the setlist</returns>
         public static string SetlistToText(Setlist setlist, bool useHtml = true)
         {
             var text = new StringBuilder();
             var venue = setlist.Venue;
-            //text.AppendFormat("<a href=\"{0}\">{1}</a> @ {2} ({3}, {4}), {5}\r\n", setlist.Artist.UrlStats, setlist.Artist.Name, setlist.Venue.Name, setlist.Venue.City.Name, setlist.Venue.City.Country.Code, setlist.GetEventDateTime("dd.MM.yy"));
             text.AppendLine($"[{setlist.GetEventDateTime("MMM dd yyyy", CultureInfo.GetCultureInfo("en-US"))}] {TagHelper.Href(setlist.Artist.UrlStats, setlist.Artist.Name)} setlist");
             text.AppendLine($"at {TagHelper.Href(venue.Url, $"{venue.Name}, {venue.City.Name}, {venue.City.Country.Name}")}");
             if (!string.IsNullOrEmpty(setlist.TourName))

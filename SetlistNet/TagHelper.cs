@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SetlistNet
+﻿namespace SetlistNet
 {
-    class TagHelper
+    internal class TagHelper
     {
-        public static string Href(string src, string value)
+        internal static string Href(string src, string value)
         {
             return $"<a href=\"{src}\">{value}</a>";
         }

@@ -1,0 +1,444 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SetlistNet</name>
+    </assembly>
+    <members>
+        <member name="T:SetlistNet.Models.ApiArrayResult`1">
+            <summary>
+            This is an abstract class, that represents a set of items, returned by API
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.ApiArrayResult`1.Total">
+            <summary>
+            Gets or sets the total amount of items matching the query.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.ApiArrayResult`1.Page">
+            <summary>
+            Gets or sets current page.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.ApiArrayResult`1.ItemsPerPage">
+            <summary>
+            Gets or sets the amount of items you get per page.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.ApiArrayResult`1.ApiType">
+            <summary>
+            Gets or sets the property "type" of an object.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.ApiArrayResult`1.TotalPages">
+            <summary>
+            Gets the total amount of pages returned by API.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.ApiArrayResult`1.Count">
+            <summary>
+            Gets Count property of inner list.
+            </summary>
+        </member>
+        <member name="T:SetlistNet.Models.Artist">
+            <summary>
+            This class represents an artist. An artist is a musician or a group of musicians. 
+            Each artist has a definite Musicbrainz Identifier (MBID) with which the artist can be uniquely identified.
+            <para>See <seealso cref="!:http://wiki.musicbrainz.org/MBID"/> for more info about Musicbrainz ID.</para>
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Artist.Disambiguation">
+            <summary>
+            Disambiguation to distinguish between artists with same names.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Artist.MBID">
+            <summary>
+            Gets or sets unique Musicbrainz Identifier (MBID), e.g. "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d" (The Beatles).
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Artist.TMID">
+            <summary>
+            Gets or sets unique Ticket Master Identifier (TMID), e.g. 1953.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Artist.TMIDSpecified">
+            <summary>
+            Gets or sets the <paramref name="TMID"/> property should be included in the output.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Artist.Name">
+            <summary>
+            Gets or sets the artist's name, e.g. "The Beatles" or "Bruce Springsteen".
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Artist.SortName">
+            <summary>
+            Gets or sets the artist's sort name, e.g. "Beatles, The" or "Springsteen, Bruce".
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Artist.Url">
+            <summary>
+            Gets or sets the url to artist's setlists' page on Setlist.fm.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Artist.UrlStats">
+            <summary>
+            Gets the url to artist's stats' page on Setlist.fm.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Artists.Items">
+            <summary>
+            Gets or sets the list of artists.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Cities.Items">
+            <summary>
+            Gets or sets the list of cities.
+            </summary>
+        </member>
+        <member name="T:SetlistNet.Models.City">
+            <summary>
+            This class represents a city where Venues are located. 
+            Most of the original city data was taken from <see cref="!:http://geonames.org"/>.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.City.Id">
+            <summary>
+            Gets or sets unique identifier.
+            <para>This is <code>geoNameId</code> property in <see cref="!:http://geonames.org"/>.
+            Setlist.fm API returns <code>cu:aa1a96e1-06c7-11e6-b736-22000bb3106b</code> for <code>id=3d59d97</code>, so switching to int temporarily.</para>
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.City.Name">
+            <summary>
+            Gets or sets the city's name, depending on the language valid values are e.g. "Mchen" or "Munich".
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.City.State">
+            <summary>
+            Gets or sets the name of city's state, e.g. "Bavaria" or "Florida".
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.City.StateCode">
+            <summary>
+            Gets or sets the code of the city's state. For most countries this two-digit numeric code, 
+            with which the state can be identified uniquely in the specific Country. See remarks for more info.
+            <para>E.g. "CA" or 02.</para>
+            </summary>
+            <remarks>
+            Valid examples are "CA" or "02" which in turn get uniquely identifiable 
+            when combined with the state's country:
+            
+            "US.CA" for California, United States or
+            "DE.02" for Bavaria, Germany
+            
+            For a complete list of available states (that aren't necessarily used in this database) 
+            is available in <see cref="!:http://download.geonames.org/export/dump/admin1Codes.txt"/> a textfile on geonames.org.
+            
+            Note that this code is only unique combined with the city's Country. The code alone is not unique.
+            </remarks>
+        </member>
+        <member name="P:SetlistNet.Models.City.Coords">
+            <summary>
+            Gets or sets the city's coordinates. Usually the coordinates of the city centre are used.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.City.Country">
+            <summary>
+            Gets or sets the city's country.
+            </summary>
+        </member>
+        <member name="T:SetlistNet.Models.Coords">
+            <summary>
+            This class represents coordinates of a point on the globe. Mostly used for <paramref name="Cities"/>.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Coords.Longitude">
+            <summary>
+            Gets or sets the longitude part of the coordinates.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Coords.LongitudeSpecified">
+            <summary>
+            Gets or sets whether the "Longitude" property should be included in the output.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Coords.Latitude">
+            <summary>
+            Gets or sets the latitude part of the coordinates.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Coords.LatitudeSpecified">
+            <summary>
+            Gets or sets whether the "Latitude" property should be included in the output.
+            </summary>
+        </member>
+        <member name="M:SetlistNet.Models.Coords.ToString">
+            <summary>
+            Returns latitude and longitude in the format "lat,long".
+            </summary>
+            <returns>String representing latitude and longitude separated by comma.</returns>
+        </member>
+        <member name="P:SetlistNet.Models.Countries.Items">
+            <summary>
+            Gets or sets the list of countries.
+            </summary>
+        </member>
+        <member name="T:SetlistNet.Models.Country">
+            <summary>
+            This class represents a country on earth.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Country.Name">
+            <summary>
+            Gets or sets the country's name. Can be a localized name - e.g. "Austria" or "Österreich" for Austria if the German name was requested.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Country.Code">
+            <summary>
+            Gets or sets the country's ISO code. E.g. "ie" for Ireland.
+            <para>See: <see cref="!:http://www.iso.org/iso/english_country_names_and_code_elements"/>.</para>
+            </summary>
+        </member>
+        <member name="T:SetlistNet.Models.Set">
+            <summary>
+            A setlist consists of different (at least one) sets. Sets can either be sets as defined in the Guidelines or encores.
+            <para>See: <see cref="!:http://www.setlist.fm/guidelines"/>.</para>
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Set.Encore">
+            <summary>
+            If the set is an encore, this property gets or sets the number of the encore, starting with 1 for the first encore, 2 for the second and so on.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Set.EncoreSpecified">
+            <summary>
+            Gets or sets whether the "Encore" property should be included in the output.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Set.Name">
+            <summary>
+            Gets or sets the description/name of the set. E.g. "Acoustic set" or "Paul McCartney solo".
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Set.Songs">
+            <summary>
+            Gets or sets this set's songs.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Setlist.Artist">
+            <summary>
+            Gets or sets the setlist's artist.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Setlist.Venue">
+            <summary>
+            Gets or sets the setlist's venue.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Setlist.Tour">
+            <summary>
+            Gets or sets the tour in which the band performed setlist.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Setlist.Sets">
+            <summary>
+            Gets or sets all sets of this setlist.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Setlist.Info">
+            <summary>
+            Gets or sets additional information on the concert - see the Guidelines for a complete list of allowed content.
+            <para>See: <see cref="!:http://www.setlist.fm/guidelines"/>.</para>
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Setlist.Url">
+            <summary>
+            Gets or sets the attribution url to which you have to link to wherever you use data from this setlist in your application.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Setlist.Id">
+            <summary>
+            Gets or sets unique identifier of setlist.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Setlist.VersionId">
+            <summary>
+            Gets or sets unique identifier of the version of setlist.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Setlist.EventDate">
+            <summary>
+            Gets or sets date of the concert in the format "dd-MM-yyyy", e.g. 31-03-2007.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Setlist.LastUpdated">
+            <summary>
+            Gets or sets date, time and time zone of the last update to this setlist in the format "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ".
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Setlists.Items">
+            <summary>
+            Gets or sets the list of setlists
+            </summary>
+        </member>
+        <member name="T:SetlistNet.Models.Song">
+            <summary>
+            This class represents a song that is part of a <paramref name="Set"/>.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Song.Name">
+            <summary>
+            The name of the song. E.g. "Yesterday" or "Wish You Were Here".
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Song.With">
+            <summary>
+            A different <paramref name="Artist"/> than the performing one that joined the stage for this song.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Song.Cover">
+            <summary>
+            The original <paramref name="Artist"/> of this song, if different to the performing artist.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Song.Info">
+            <summary>
+            Special incidents or additional information about the way the song was performed at this specific concert. See the Guidelines complete list of allowed content.
+            <para>Guidelines: <see cref="!:http://www.setlist.fm/guidelines"/>.</para>
+            </summary>
+        </member>
+        <member name="M:SetlistNet.Models.Song.ToString">
+            <summary>
+            Returns the <paramref name="Name"/> propertu of the object.
+            </summary>
+            <returns>A string that represents <paramref name="Name"/> property.</returns>
+        </member>
+        <member name="P:SetlistNet.Models.Tour.Name">
+            <summary>
+            Gets or sets the city's name, depending on the language valid values are e.g. "Mchen" or "Munich".
+            </summary>
+        </member>
+        <member name="T:SetlistNet.Models.User">
+            <summary>
+            This class represents a user.
+            </summary>
+        </member>
+        <member name="T:SetlistNet.Models.Venue">
+            <summary>
+            This class represents a venue. It's usually the name of the venue and city combined. 
+            <para>See remarks for more info.</para>
+            </summary>
+            <remarks> 
+            Venues are places where concerts take place. 
+            They usually consist of a venue name and a city - but there are also some venues that do not have a city attached yet. 
+            In such a case, the city simply isn't set and the city and country may (but do not have to) be in the name.
+            </remarks>
+        </member>
+        <member name="P:SetlistNet.Models.Venue.Id">
+            <summary>
+            Gets or sets unique identifier.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Venue.Name">
+            <summary>
+            Gets or sets the name of the venue, usually without city and country. 
+            <para>E.g. "Madison Square Garden" or "Royal Albert Hall".</para>
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Venue.City">
+            <summary>
+            Gets or sets the city in which the venue is located.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Venue.Url">
+            <summary>
+            Gets or sets the attribution url.
+            </summary>
+        </member>
+        <member name="P:SetlistNet.Models.Venues.Items">
+            <summary>
+            Gets or sets the list of venues.
+            </summary>
+        </member>
+        <member name="M:SetlistNet.SetlistApi.SearchArtists(SetlistNet.Models.Artist,System.Int32)">
+            <summary>
+            Search for artists.
+            </summary>
+            <param name="searchFields">
+            You must provide a value for at least one of the following properties:
+            <para>MBID, TMID (set <code>TMIDSpecified = true</code>), Name.</para>
+            </param>
+            <param name="page">Page number to fetch.</param>
+            <returns>A list of matching artist.</returns>
+        </member>
+        <member name="M:SetlistNet.SetlistApi.SearchCities(SetlistNet.Models.City,System.Int32)">
+            <summary>
+            Search for a city.
+            </summary>
+            <param name="searchFields">
+            You must provide a value for at least one of the following properties:
+            <para>Name, State, StateCode, Country.Code.</para>
+            </param>
+            <param name="page">Page number to fetch.</param>
+            <returns>A list of matching cities.</returns>
+        </member>
+        <member name="M:SetlistNet.SetlistApi.SearchSetlists(SetlistNet.Models.Setlist,System.Int32)">
+            <summary>
+            Search for setlists.
+            </summary>
+            <param name="searchFields">
+            You must provide a value for at least one of the following properties:
+            <para>Tour, LastUpdated, EventDate (you could set only a year, e.g. <code>00-00-2007</code>),</para>
+            <para>Artist.Name, Artist.MBID, Artist.TMID (set <code>TMIDSpecified = true</code>)</para>
+            <para>Venue.Id, Venue.Name, Venue.City.Id, Venue.City.Name. Venue.City.State, Venue.City.State.Code, Venue.City.Country.Code</para>
+            </param>
+            <param name="page">Page number to fetch.</param>
+            <returns>A list of matching setlists.</returns>
+        </member>
+        <member name="M:SetlistNet.SetlistApi.SearchVenues(SetlistNet.Models.Venue,System.Int32)">
+            <summary>
+            Search for venues.
+            </summary>
+            <param name="searchFields">
+            You must provide a value for at least one of the following properties:
+            <para>Name, City.Id, City.Name, City.State, City.StateCode, City.Country.Code.</para>
+            </param>
+            <param name="page">Page number to fetch.</param>
+            <returns>A list of matching venues.</returns>
+        </member>
+        <member name="M:SetlistNet.SetlistApi.Setlist(System.String)">
+            <summary>
+            Returns the current version of a setlist. E.g. if you pass the id of a setlist that got edited since you last accessed it, you'll get the current version.
+            </summary>
+            <param name="setlistId">The setlist id.</param>
+            <param name="page">Page number to fetch.</param>
+            <returns>The setlist for the provided id.</returns>
+        </member>
+        <member name="M:SetlistNet.SetlistApi.SetlistVersion(System.String)">
+            <summary>
+            Returns a setlist for the given versionId. The setlist returned isn't necessarily the most recent version.
+            E.g. if you pass the versionId of a setlist that got edited since you last accessed it, you'll get the same version as last time.
+            </summary>
+            <param name="versionId">The version ID.</param>
+            <returns>The setlist for the provided versionId.</returns>
+        </member>
+        <member name="M:SetlistNet.SetlistApi.UserAttended(System.String,System.Int32)">
+            <summary>
+            Get a list of setlists of concerts attended by a user.
+            </summary>
+            <param name="userId">A user's userId.</param>
+            <param name="page">Page number to fetch.</param>
+            <returns>A list of setlists.</returns>
+        </member>
+        <member name="M:SetlistNet.SetlistApi.UserEdited(System.String,System.Int32)">
+            <summary>
+            Get a list of setlists of concerts edited by a user. 
+            <para>The list contains the current version, not the version edited.</para>
+            </summary>
+            <param name="userId">The user's userId.</param>
+            <param name="page">Page number to fetch.</param>
+            <returns>A list of setlists.</returns>
+        </member>
+    </members>
+</doc>
