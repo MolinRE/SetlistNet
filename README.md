@@ -1,3 +1,4 @@
+
 ## setlist.fm API .NET Core library
 
 C# library to interact with [setlist.fm API](http://api.setlist.fm/docs/index.html).
@@ -46,7 +47,7 @@ if (setlists.Count > 0)
 
 So, you must provide search criteria as _Setlist_ object in this case.
 
-Every search method has a description which says what properties of given object will become part of the search query. Not all properties are neccessary, for example: _Url_ or _Info_.
+Every search method has a description which says what properties of given object will become part of the search query. Not all properties are necessary, for example: _Url_ or _Info_.
 
 ### Search for artists
 
@@ -67,11 +68,11 @@ foreach (Artist artist in artists)
 }
 ```
 
-Same here. If you want to search for artists (or anything else, because it works the same way), you must provide _Artist_ object with neccessary properties.
+Same here. If you want to search for artists (or anything else, because it works the same way), you must provide _Artist_ object with necessary properties.
 
 ### Internationalization
 
-This feature listed as "expiremental" by official documentation and does not work for all cities.
+This feature listed as "experimental" by official documentation and does not work for all cities.
 However, for the rest of it, you can get localized cities and countries names. The default language is English (`en`), but you can provide any of the languages Spanish (`es`), French (`fr`), German (`de`), Portuguese (`pt`), Turkish (`tr`), Italian (`it`) or Polish (`pl`).
 
 ```csharp
@@ -91,8 +92,11 @@ More examples coming soon...
 
 ## Installation
 
-Download the repo and add it to the project references. NuGet coming soon.
+Nuget: https://www.nuget.org/packages/SetlistNet/
 
 ## Tests
 
 Coming soon.
+
+## Issues and contributions
+...are welcome.
