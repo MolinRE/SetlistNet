@@ -2,11 +2,11 @@
 ## setlist.fm API .NET Core library
 
 C# library to interact with [setlist.fm API](http://api.setlist.fm/docs/index.html).
-It's currently supports all methods listed in the API **REST Endpoints** section, such as Setlists Search or getting Artist by MBID.
+It's currently supports all methods listed in the **REST Endpoints** section, such as setlists search or getting artist by MBID.
 
 ## Usage
 
-## Get the key
+### Get the key
 
 First of all, [apply](https://www.setlist.fm/settings/api) for the setlist.fm API key. It's needed for __all__ requests.
 
@@ -23,17 +23,17 @@ Setlists setlists = api.SearchSetlists(new Setlist()
 
 if (setlists.Count > 0)
 {
-	// Setlist consists of Sets
+	// A setlist consists of Sets
 	foreach (Set set in setlists[0].Sets)
 	{
-		// Set can be an encore
+		// A set can be an encore
 		if (set.EncoreSpecified)
 			Console.WriteLine("---");
-		// ...or can have special name
+		// ...or can have a special name
 		if (!string.IsNullOrEmpty(set.Name))
 			Console.WriteLine(set.Name);
 
-		// Set consists of Songs
+		// A set consists of Songs
 		foreach (Song song in set.Songs)
 		{
 			Console.WriteLine(song.Name);
