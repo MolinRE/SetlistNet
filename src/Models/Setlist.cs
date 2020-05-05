@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace SetlistNet.Models
 {
-    [JsonObject]
     /// <summary>
     /// This class represents a setlist. 
     /// <para>
@@ -20,6 +20,7 @@ namespace SetlistNet.Models
     /// These different versions have a unique id on its own. So setlists can have the same id although they differ as far 
     /// as the content is concerned - thus the best way to check if two setlists are the same is to compare their versionIds.
     /// </remarks>
+    [JsonObject]
     public class Setlist
     {
         #region Private Fields
@@ -238,28 +239,25 @@ namespace SetlistNet.Models
         public DateTime? GetEventDateTime()
         {
             DateTime result;
-            if (DateTime.TryParse(EventDate, out result))
+            if (DateTime.TryParseExact(EventDate, "dd-MM-yyyy", 
+                CultureInfo.InvariantCulture, DateTimeStyles.None, out result))
+            {
                 return result;
-            else
-                return null;
+            }
+            
+            return null;
         }
 
         public string GetEventDateTime(string format)
         {
-            DateTime result;
-            if (DateTime.TryParse(EventDate, out result))
-                return result.ToString(format);
-            else
-                return "";
+            var dt = GetEventDateTime();
+            return dt.HasValue ? dt.Value.ToString(format) : "";
         }
 
         public string GetEventDateTime(string format, IFormatProvider provider)
         {
-            DateTime result;
-            if (DateTime.TryParse(EventDate, out result))
-                return result.ToString(format, provider);
-            else
-                return "";
+            var dt = GetEventDateTime();
+            return dt.HasValue ? dt.Value.ToString(format, provider) : "";
         }
 
         public void SetEventDateTime(DateTime dt)
@@ -279,7 +277,7 @@ namespace SetlistNet.Models
 
         public override string ToString()
         {
-            return string.Format("[{0}] {1} @ {2}", EventDate, Artist.Name, Venue.Name);
+            return $"[{EventDate}] {Artist.Name} @ {Venue.Name}";
         }
     }
 }

@@ -335,10 +335,7 @@ namespace SetlistNet
                 value = sr.ReadToEnd();
             }
 
-            var result = JsonConvert.DeserializeObject<T>(value, new JsonSerializerSettings()
-            {
-                
-            });
+            var result = JsonConvert.DeserializeObject<T>(value);
             return result;
         }
     }
