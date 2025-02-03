@@ -16,32 +16,32 @@ First of all, [apply](https://www.setlist.fm/settings/api) for the setlist.fm AP
 SetlistApi api = new SetlistApi(apiKey);
 Setlists setlists = api.SearchSetlists(new Setlist()
 {
-	// Search for Foo Fighters' setlists of 2004.
-	Artist = new Artist("foo fighters"),
-	EventDate = "00-00-2004"
+  // Search for Foo Fighters' setlists of 2004.
+  Artist = new Artist("foo fighters"),
+  EventDate = "00-00-2004"
 });
 
 if (setlists.Count > 0)
 {
-	// A setlist consists of Sets
-	foreach (Set set in setlists[0].Sets)
-	{
-		// A set can be an encore
-		if (set.EncoreSpecified)
-			Console.WriteLine("---");
-		// ...or can have a special name
-		if (!string.IsNullOrEmpty(set.Name))
-			Console.WriteLine(set.Name);
+  // A setlist consists of Sets
+  foreach (Set set in setlists[0].Sets)
+  {
+    // A set can be an encore
+    if (set.EncoreSpecified)
+      Console.WriteLine("---");
+    // ...or can have a special name
+    if (!string.IsNullOrEmpty(set.Name))
+      Console.WriteLine(set.Name);
 
-		// A set consists of Songs
-		foreach (Song song in set.Songs)
-		{
-			Console.WriteLine(song.Name);
-		}
-	}
+    // A set consists of Songs
+    foreach (Song song in set.Songs)
+    {
+      Console.WriteLine(song.Name);
+    }
+  }
 
-	// You can also use this method for text representation of the setlist
-	Util.SetlistToText(setlists[0]);
+  // You can also use this method for text representation of the setlist
+  Util.SetlistToText(setlists[0]);
 }
 ```
 
@@ -55,16 +55,16 @@ Every search method has a description which says what properties of given object
 Artists artists = api.SearchArtists(new Artist("muse"));
 foreach (Artist artist in artists)
 {
-	Console.Write(artist.Name);
+  Console.Write(artist.Name);
 
-	// There may be several performers with the same name - use "Disambiguation" property
-	// to get SetlistFM notes and distinguish the right one.
-	if (!string.IsNullOrEmpty(artist.Disambiguation))
-		Console.Write(", " + artist.Disambiguation);
+  // There may be several performers with the same name - use "Disambiguation" property
+  // to get SetlistFM notes and distinguish the right one.
+  if (!string.IsNullOrEmpty(artist.Disambiguation))
+    Console.Write(", " + artist.Disambiguation);
 
-	// Or simply use this:
-	Console.WriteLine(artist.NameWithDisambiguation);
-	// It will show just the name of the Artist if there's no disambiguation.
+  // Or simply use this:
+  Console.WriteLine(artist.NameWithDisambiguation);
+  // It will show just the name of the Artist if there's no disambiguation.
 }
 ```
 
