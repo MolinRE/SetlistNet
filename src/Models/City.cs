@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace SetlistNet.Models
 {
@@ -21,54 +21,36 @@ namespace SetlistNet.Models
         /// <summary>
         /// Gets or sets unique identifier.
         /// <para>This is <code>geoNameId</code> property in <see cref="http://geonames.org"/>.
-        /// Setlist.fm API returns <code>cu:aa1a96e1-06c7-11e6-b736-22000bb3106b</code> for <code>id=3d59d97</code>, so switching to int temporarily.</para>
+        /// Setlist.fm API returns <code>cu:aa1a96e1-06c7-11e6-b736-22000bb3106b</code> for <code>id=3d59d97</code>, so switching to int temporarily</para>
         /// </summary>
-        [JsonProperty(PropertyName = "id")]
+        [JsonPropertyName("id")]
         public string Id
         {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
+            get => this._id;
+            set => this._id = value;
         }
         /// <summary>
         /// Gets or sets the city's name, depending on the language valid values are e.g. "Mchen" or "Munich".
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
+        [JsonPropertyName("name")]
         public string Name
         {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
+            get => this._name;
+            set => this._name = value;
         }
         /// <summary>
         /// Gets or sets the name of city's state, e.g. "Bavaria" or "Florida".
         /// </summary>
-        [JsonProperty(PropertyName = "state")]
+        [JsonPropertyName("state")]
         public string State
         {
-            get
-            {
-                return this._state;
-            }
-            set
-            {
-                this._state = value;
-            }
+            get => this._state;
+            set => this._state = value;
         }
         /// <summary>
         /// Gets or sets the code of the city's state. For most countries this two-digit numeric code, 
         /// with which the state can be identified uniquely in the specific Country. See remarks for more info.
-        /// <para>E.g. "CA" or 02.</para>
+        /// <para>E.g. "CA" or 02</para>
         /// </summary>
         /// <remarks>
         /// Valid examples are "CA" or "02" which in turn get uniquely identifiable 
@@ -82,47 +64,29 @@ namespace SetlistNet.Models
         /// 
         /// Note that this code is only unique combined with the city's Country. The code alone is not unique.
         /// </remarks>
-        [JsonProperty(PropertyName = "stateCode")]
+        [JsonPropertyName("stateCode")]
         public string StateCode
         {
-            get
-            {
-                return this._stateCode;
-            }
-            set
-            {
-                this._stateCode = value;
-            }
+            get => this._stateCode;
+            set => this._stateCode = value;
         }
         /// <summary>
         /// Gets or sets the city's coordinates. Usually the coordinates of the city centre are used.
         /// </summary>
-        [JsonProperty(PropertyName = "coords")]
+        [JsonPropertyName("coords")]
         public Coords Coords
         {
-            get
-            {
-                return this._coords;
-            }
-            set
-            {
-                this._coords = value;
-            }
+            get => this._coords;
+            set => this._coords = value;
         }
         /// <summary>
         /// Gets or sets the city's country.
         /// </summary>
-        [JsonProperty(PropertyName = "country")]
+        [JsonPropertyName("country")]
         public Country Country
         {
-            get
-            {
-                return this._country;
-            }
-            set
-            {
-                this._country = value;
-            }
+            get => this._country;
+            set => this._country = value;
         }
         #endregion
 
@@ -152,9 +116,13 @@ namespace SetlistNet.Models
         public override string ToString()
         {
             if (string.IsNullOrEmpty(State))
-                return string.Format("{0} ({1})", Name, Country.Name);
+            {
+                return $"{Name} ({Country.Name})";
+            }
             else
-                return string.Format("{0}, {1} ({2})", Name, State, Country.Name);
+            {
+                return $"{Name}, {State} ({Country.Name})";
+            }
         }
     }
 }

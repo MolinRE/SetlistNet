@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace SetlistNet.Models
 {
@@ -18,13 +18,10 @@ namespace SetlistNet.Models
         /// <summary>
         /// Gets or sets the longitude part of the coordinates.
         /// </summary>
-        [JsonProperty(PropertyName = "long")]
+        [JsonPropertyName("long")]
         public double Longitude
         {
-            get
-            {
-                return this._longitude.GetValueOrDefault();
-            }
+            get => this._longitude.GetValueOrDefault();
             set
             {
                 this._longitude = value;
@@ -36,25 +33,16 @@ namespace SetlistNet.Models
         /// </summary>
         public bool LongitudeSpecified
         {
-            get
-            {
-                return this._longitudeSpecified;
-            }
-            set
-            {
-                this._longitudeSpecified = value;
-            }
+            get => this._longitudeSpecified;
+            set => this._longitudeSpecified = value;
         }
         /// <summary>
         /// Gets or sets the latitude part of the coordinates.
         /// </summary>
-        [JsonProperty(PropertyName = "lat")]
+        [JsonPropertyName("lat")]
         public double Latitude
         {
-            get
-            {
-                return this._latitude.GetValueOrDefault();
-            }
+            get => this._latitude.GetValueOrDefault();
             set
             {
                 this._latitude = value;
@@ -66,24 +54,18 @@ namespace SetlistNet.Models
         /// </summary>
         public bool LatitudeSpecified
         {
-            get
-            {
-                return this._latitudeSpecified;
-            }
-            set
-            {
-                this._latitudeSpecified = value;
-            }
+            get => this._latitudeSpecified;
+            set => this._latitudeSpecified = value;
         }
         #endregion
 
         /// <summary>
         /// Returns latitude and longitude in the format "lat,long".
         /// </summary>
-        /// <returns>String representing latitude and longitude separated by comma.</returns>
+        /// <returns>String representing latitude and longitude separated by comma</returns>
         public override string ToString()
         {
-            return string.Format("Latitude = {0}, Longitude = {1}", Latitude, Longitude);
+            return $"Latitude = {Latitude}, Longitude = {Longitude}";
         }
     }
 }

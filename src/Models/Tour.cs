@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace SetlistNet.Models
 {
@@ -9,17 +9,11 @@ namespace SetlistNet.Models
         /// <summary>
         /// Gets or sets the city's name, depending on the language valid values are e.g. "Mchen" or "Munich".
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
+        [JsonPropertyName("name")]
         public string Name
         {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
+            get => this._name;
+            set => this._name = value;
         }
 
         public Tour()

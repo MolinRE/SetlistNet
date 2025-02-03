@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace SetlistNet.Models
 {
@@ -20,121 +20,67 @@ namespace SetlistNet.Models
         #endregion
 
         #region Properties
-        [JsonProperty(PropertyName = "flickr")]
+        [JsonPropertyName("flickr")]
         public string Flickr
         {
-            get
-            {
-                return this._flickr;
-            }
-            set
-            {
-                this._flickr = value;
-            }
+            get => this._flickr;
+            set => this._flickr = value;
         }
 
-        [JsonProperty(PropertyName = "twitter")]
+        [JsonPropertyName("twitter")]
         public string Twitter
         {
-            get
-            {
-                return this._twitter;
-            }
-            set
-            {
-                this._twitter = value;
-            }
+            get => this._twitter;
+            set => this._twitter = value;
         }
 
-        [JsonProperty(PropertyName = "website")]
+        [JsonPropertyName("website")]
         public string Website
         {
-            get
-            {
-                return this._website;
-            }
-            set
-            {
-                this._website = value;
-            }
+            get => this._website;
+            set => this._website = value;
         }
 
-        [JsonProperty(PropertyName = "userId")]
+        [JsonPropertyName("userId")]
         public string UserId
         {
-            get
-            {
-                return this._userId;
-            }
-            set
-            {
-                this._userId = value;
-            }
+            get => this._userId;
+            set => this._userId = value;
         }
 
-        [JsonProperty(PropertyName = "lastFm")]
+        [JsonPropertyName("lastFm")]
         public string LastFm
         {
-            get
-            {
-                return this._lastFm;
-            }
-            set
-            {
-                this._lastFm = value;
-            }
+            get => this._lastFm;
+            set => this._lastFm = value;
         }
 
-        [JsonProperty(PropertyName = "mySpace")]
+        [JsonPropertyName("mySpace")]
         public string MySpace
         {
-            get
-            {
-                return this._mySpace;
-            }
-            set
-            {
-                this._mySpace = value;
-            }
+            get => this._mySpace;
+            set => this._mySpace = value;
         }
 
-        [JsonProperty(PropertyName = "fullname")]
+        [JsonPropertyName("fullname")]
         public string Fullname
         {
-            get
-            {
-                return this._fullname;
-            }
-            set
-            {
-                this._fullname = value;
-            }
+            get => this._fullname;
+            set => this._fullname = value;
         }
 
-        [JsonProperty(PropertyName = "about")]
+        [JsonPropertyName("about")]
         public string About
         {
-            get
-            {
-                return this._about;
-            }
-            set
-            {
-                this._about = value;
-            }
+            get => this._about;
+            set => this._about = value;
         }
 
-        [JsonProperty(PropertyName = "url")]
+        [JsonPropertyName("url")]
         public string Url
         {
-            get
-            {
-                return this._url;
-            }
-            set
-            {
-                this._url = value;
-            }
+            get => this._url;
+            set => this._url = value;
         }
         #endregion
 

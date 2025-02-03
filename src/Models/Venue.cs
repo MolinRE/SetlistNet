@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace SetlistNet.Models
 {
     /// <summary>
     /// This class represents a venue. It's usually the name of the venue and city combined. 
-    /// <para>See remarks for more info.</para>
+    /// <para>See remarks for more info</para>
     /// </summary>
     /// <remarks> 
     /// Venues are places where concerts take place. 
@@ -24,63 +24,39 @@ namespace SetlistNet.Models
         /// <summary>
         /// Gets or sets unique identifier.
         /// </summary>
-        [JsonProperty(PropertyName = "id")]
+        [JsonPropertyName("id")]
         public string Id
         {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
+            get => this._id;
+            set => this._id = value;
         }
         /// <summary>
         /// Gets or sets the name of the venue, usually without city and country. 
-        /// <para>E.g. "Madison Square Garden" or "Royal Albert Hall".</para>
+        /// <para>E.g. "Madison Square Garden" or "Royal Albert Hall"</para>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
+        [JsonPropertyName("name")]
         public string Name
         {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
+            get => this._name;
+            set => this._name = value;
         }
         /// <summary>
         /// Gets or sets the city in which the venue is located.
         /// </summary>
-        [JsonProperty(PropertyName = "city")]
+        [JsonPropertyName("city")]
         public City City
         {
-            get
-            {
-                return this._city;
-            }
-            set
-            {
-                this._city = value;
-            }
+            get => this._city;
+            set => this._city = value;
         }
         /// <summary>
         /// Gets or sets the attribution url.
         /// </summary>
-        [JsonProperty(PropertyName = "url")]
+        [JsonPropertyName("url")]
         public string Url
         {
-            get
-            {
-                return this._url;
-            }
-            set
-            {
-                this._url = value;
-            }
+            get => this._url;
+            set => this._url = value;
         }
         #endregion
 

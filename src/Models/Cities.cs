@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace SetlistNet.Models
 {
-    [JsonObject]
     /// <summary>
     /// A Result consisting of a list of cities.
     /// </summary>
@@ -12,22 +11,16 @@ namespace SetlistNet.Models
         /// <summary>
         /// Gets or sets the list of cities.
         /// </summary>
-        [JsonProperty(PropertyName = "cities")]
+        [JsonPropertyName("cities")]
         internal List<City> Items
         {
-            get
-            {
-                return _items;
-            }
-            set
-            {
-                _items = value;
-            }
+            get => _items;
+            set => _items = value;
         }
 
         public override string ToString()
         {
-            return string.Format("Count = {0}", Items == null ? 0 : Items.Count);
+            return $"Count = {Items?.Count ?? 0}";
         }
     }
 }

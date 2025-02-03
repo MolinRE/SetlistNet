@@ -3,16 +3,20 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Authors>Konstantin Komarov</Authors>
-    <Description>C# library to interact with setlist.fm API. It's currently supports all methods listed in the API REST Endpoints section, such as Setlists Search or getting Artist by MBID.</Description>
+    <Description>C# library to interact with setlist.fm API. It's currently supports all methods listed in the API REST Endpoints section, such as Setlists Search or getting Artist by MBID</Description>
     <Copyright>Konstantin Komarov</Copyright>
     <RepositoryUrl>https://github.com/MolinRE/SetlistNet</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>setlist.fm, setlist, concerts, shows, live</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
-    <LangVersion>default</LangVersion>
-    <PackageVersion>1.1.0</PackageVersion>
+    <LangVersion>latestmajor</LangVersion>
+    <PackageVersion>1.2.0</PackageVersion>
     <Title>SetlistNet</Title>
     <PackageProjectUrl>https://github.com/MolinRE/SetlistNet</PackageProjectUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AssemblyVersion>1.2.0.0</AssemblyVersion>
+    <FileVersion>1.2.0.0</FileVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -20,7 +24,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="System.Text.Json" Version="9.0.1" />
   </ItemGroup>
 
 </Project>

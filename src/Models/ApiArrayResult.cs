@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace SetlistNet.Models
 {
@@ -21,57 +21,39 @@ namespace SetlistNet.Models
         /// <summary>
         /// Gets or sets the total amount of items matching the query.
         /// </summary>
-        [JsonProperty(PropertyName = "total")]
+        [JsonPropertyName("total")]
         public int Total
         {
-            get
-            {
-                return this._total;
-            }
-            set
-            {
-                this._total = value;
-            }
+            get => this._total;
+            set => this._total = value;
         }
         /// <summary>
         /// Gets or sets current page.
         /// </summary>
-        [JsonProperty(PropertyName = "page")]
+        [JsonPropertyName("page")]
         public int Page
         {
-            get
-            {
-                return this._page;
-            }
-            set
-            {
-                this._page = value;
-            }
+            get => this._page;
+            set => this._page = value;
         }
         /// <summary>
         /// Gets or sets the amount of items you get per page.
         /// </summary>
-        [JsonProperty(PropertyName = "itemsPerPage")]
+        [JsonPropertyName("itemsPerPage")]
         public int ItemsPerPage
         {
-            get
-            {
-                return this._itemsPerPage;
-            }
-            set
-            {
-                this._itemsPerPage = value;
-            }
+            get => this._itemsPerPage;
+            set => this._itemsPerPage = value;
         }
 
         /// <summary>
         /// Gets or sets the property "type" of an object.
         /// </summary>
-        [JsonProperty(PropertyName = "type")]
+        [JsonPropertyName("type")]
         public string ApiType
         {
-            get { return _apiType; }
-            set { _apiType = value; }
+            get => _apiType;
+            set => _apiType = value;
         }
 
         /// <summary>
@@ -81,11 +63,19 @@ namespace SetlistNet.Models
         {
             get
             {
-                if (ItemsPerPage == 0) return 0;
+                if (ItemsPerPage == 0)
+                {
+                    return 0;
+                }
                 else
-                    if (ItemsPerPage > Total) return 1;
-                else
+                    if (ItemsPerPage > Total)
+                    {
+                        return 1;
+                    }
+                    else
+                {
                     return (int)Math.Floor((double)Total / ItemsPerPage);
+                }
             }
         }
 
@@ -100,21 +90,9 @@ namespace SetlistNet.Models
         /// <summary>
         /// Gets Count property of inner list.
         /// </summary>
-        public int Count
-        {
-            get
-            {
-                return _items == null ? 0 : _items.Count;
-            }
-        }
+        public int Count => _items?.Count ?? 0;
 
-        public bool IsReadOnly
-        {
-            get
-            {
-                return ((IList)_items).IsReadOnly;
-            }
-        }
+        public bool IsReadOnly => ((IList)_items).IsReadOnly;
 
         public void Add(T item)
         {
@@ -152,7 +130,7 @@ namespace SetlistNet.Models
         #region IEnumerable<T>
         public IEnumerator<T> GetEnumerator()
         {
-            foreach (T artist in _items)
+            foreach (var artist in _items)
                 yield return artist;
         }
         #endregion
@@ -160,14 +138,8 @@ namespace SetlistNet.Models
         #region IList<T>
         public T this[int key]
         {
-            get
-            {
-                return _items[key];
-            }
-            set
-            {
-                _items[key] = value;
-            }
+            get => _items[key];
+            set => _items[key] = value;
         }
 
         public int IndexOf(T item)

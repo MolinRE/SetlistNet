@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace SetlistNet.Models
 {
@@ -16,33 +16,21 @@ namespace SetlistNet.Models
         /// <summary>
         /// Gets or sets the country's name. Can be a localized name - e.g. "Austria" or "Österreich" for Austria if the German name was requested.
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
+        [JsonPropertyName("name")]
         public string Name
         {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
+            get => this._name;
+            set => this._name = value;
         }
         /// <summary>
         /// Gets or sets the country's ISO code. E.g. "ie" for Ireland.
-        /// <para>See: <see cref="http://www.iso.org/iso/english_country_names_and_code_elements"/>.</para>
+        /// <para>See: <see cref="http://www.iso.org/iso/english_country_names_and_code_elements"/></para>
         /// </summary>
-        [JsonProperty(PropertyName = "code")]
+        [JsonPropertyName("code")]
         public string Code
         {
-            get
-            {
-                return this._code;
-            }
-            set
-            {
-                this._code = value;
-            }
+            get => this._code;
+            set => this._code = value;
         }
         #endregion
 
