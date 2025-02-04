@@ -5,8 +5,9 @@ namespace SetlistNet.Models;
 /// <summary>
 /// This class represents a city where Venues are located. 
 /// Most of the original city data was taken from <a href="http://geonames.org">Geonames.org</a>.
+/// <seealso cref="http://geonames.org"/>
 /// </summary>
-public class City(string id, string name, string? state, string stateCode, Coords coords, Country country)
+public class City(string id, string name, Coords coords, Country country, string? state, string? stateCode)
 {
     /// <summary>
     /// Gets or sets unique identifier
@@ -32,24 +33,18 @@ public class City(string id, string name, string? state, string stateCode, Coord
     public string? State { get; set; } = state;
 
     /// <summary>
-    /// Gets or sets the code of the city's state. For most countries this two-digit numeric code, 
-    /// with which the state can be identified uniquely in the specific Country. See remarks for more info.
-    /// <para>E.g. "CA" or 02</para>
-    /// </summary>
-    /// <remarks>
-    /// Valid examples are "CA" or "02" which in turn get uniquely identifiable 
-    /// when combined with the state's country:
-    /// 
-    /// "US.CA" for California, United States or
-    /// "DE.02" for Bavaria, Germany
-    /// 
-    /// For a complete list of available states (that aren't necessarily used in this database) 
-    /// is available in <see cref="http://download.geonames.org/export/dump/admin1Codes.txt"/> a textfile on geonames.org.
-    /// 
+    /// The code of the city's state. For most countries this is a two-digit numeric code, with which the state can
+    /// be identified uniquely in the specific <see cref="Country"/>. The code can also be a string for other cities.
+    /// Valid examples are <c>"CA"</c> or <c>"02"</c> which in turn get uniquely identifiable when combined with the state's
+    /// country: "US.CA" for California, United States or "DE.02" for Bavaria, Germany.
+    /// <para>
+    /// For a complete list of available states (that aren't necessarily used in this database) is available in <a href="http://download.geonames.org/export/dump/admin1CodesASCII.txt">a textfile on geonames.org</a>.
     /// Note that this code is only unique combined with the city's Country. The code alone is not unique.
-    /// </remarks>
+    /// </para>
+    /// </summary>
+    /// <example>"US.CA" for California, United States or "DE.02" for Bavaria, Germany</example>
     [JsonPropertyName("stateCode")]
-    public string StateCode { get; set; } = stateCode;
+    public string? StateCode { get; set; } = stateCode;
 
     /// <summary>
     /// Gets or sets the city's coordinates. Usually the coordinates of the city centre are used

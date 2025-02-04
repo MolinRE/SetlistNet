@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Text.Json.Serialization;
 
 namespace SetlistNet.Models;
@@ -20,9 +19,9 @@ namespace SetlistNet.Models;
 public class Setlist(
     Artist artist,
     Venue venue,
-    Tour tour,
+    Tour? tour,
     Sets sets,
-    string info,
+    string? info,
     string url,
     string id,
     string versionId,
@@ -45,7 +44,7 @@ public class Setlist(
     /// Gets or sets the tour in which the band performed setlist.
     /// </summary>
     [JsonPropertyName("tour")]
-    public Tour Tour { get; set; } = tour;
+    public Tour? Tour { get; set; } = tour;
 
     /// <summary>
     /// Gets or sets all sets of this setlist.
@@ -58,7 +57,7 @@ public class Setlist(
     /// <seealso cref="!:http://www.setlist.fm/guidelines"/>
     /// </summary>
     [JsonPropertyName("info")]
-    public string Info { get; set; } = info;
+    public string? Info { get; set; } = info;
 
     /// <summary>
     /// Gets or sets the attribution url to which you have to link to wherever you use data from this setlist in your application.
