@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
 namespace SetlistNet.Models
@@ -10,7 +8,7 @@ namespace SetlistNet.Models
     /// This class represents a setlist. 
     /// <para>
     /// Please remember that setlist.fm is a wiki, so there are different versions of the same setlist. 
-    /// Thus, the best way to check whether two setlists are the same is to use <paramref name="VersionId"/>.
+    /// Thus, the best way to check whether two setlists are the same is to use <see cref="VersionId"/>.
     /// </para>
     /// </summary>
     /// <remarks>
@@ -39,23 +37,11 @@ namespace SetlistNet.Models
         [JsonPropertyName("tour")]
         public Tour Tour { get; set; }
 
-        [JsonIgnore]
-        public string? TourName
-        {
-            get => Tour?.Name;
-            set
-            {
-                Tour ??= new();
-
-                Tour.Name = value;
-            }
-        }
-
         /// <summary>
         /// Gets or sets all sets of this setlist.
         /// </summary>
-        [JsonIgnore]
-        public List<Set> Sets { get; set; }
+        [JsonPropertyName("sets")]
+        public Sets Sets { get; set; }
 
         /// <summary>
         /// Gets or sets additional information on the concert - see the Guidelines for a complete list of allowed content.
@@ -86,22 +72,13 @@ namespace SetlistNet.Models
         /// Gets or sets date of the concert in the format "dd-MM-yyyy", e.g. 31-03-2007.
         /// </summary>
         [JsonPropertyName("eventDate")]
-        public string EventDate { get; set; }
+        public DateTime EventDate { get; set; }
 
         /// <summary>
         /// Gets or sets date, time and time zone of the last update to this setlist in the format "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ".
         /// </summary>
         [JsonPropertyName("lastUpdated")]
-        public string LastUpdated { get; set; }
-
-        // [JsonExtensionData]
-        // private IDictionary<string, J> _additionalData;
-        //
-        // [OnDeserialized]
-        // private void OnDeserialized(StreamingContext context)
-        // {
-        //     Sets = _additionalData["sets"].First.First.ToObject<List<Set>>();
-        // }
+        public DateTime LastUpdated { get; set; }
 
         public Setlist()
         {
@@ -113,46 +90,6 @@ namespace SetlistNet.Models
             Artist = artist;
         }
 
-        public DateTime? GetEventDateTime()
-        {
-            if (DateTime.TryParseExact(EventDate, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var result))
-            {
-                return result;
-            }
-            
-            return null;
-        }
-
-        public string GetEventDateTime(string format)
-        {
-            var dt = GetEventDateTime();
-            return dt.HasValue ? dt.Value.ToString(format) : "";
-        }
-
-        public string GetEventDateTime(string format, IFormatProvider provider)
-        {
-            var dt = GetEventDateTime();
-            return dt.HasValue ? dt.Value.ToString(format, provider) : "";
-        }
-
-        public void SetEventDateTime(DateTime dt)
-        {
-            EventDate = dt.ToString("dd-MM-yyyy");
-        }
-
-        public ushort GetYear()
-        {
-            if (EventDate is { Length: 10 })
-            {
-                return Convert.ToUInt16(EventDate[6..]);
-            }
-
-            return 0;
-        }
-
-        public override string ToString()
-        {
-            return $"[{EventDate}] {Artist.Name} @ {Venue.Name}";
-        }
+        public override string ToString() => $"[{EventDate}] {Artist.Name} @ {Venue.Name}";
     }
 }

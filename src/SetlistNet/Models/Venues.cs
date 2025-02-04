@@ -20,7 +20,7 @@ namespace SetlistNet.Models
 
         public override string ToString()
         {
-            return $"Count = {Items?.Count ?? 0}";
+            return $"Count = {Items.Count}";
         }
     }
 }

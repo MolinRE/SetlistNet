@@ -7,86 +7,33 @@ namespace SetlistNet.Models
     /// </summary>
     public class User
     {
-        #region Private Fields
-        private string _flickr;
-        private string _twitter;
-        private string _website;
-        private string _userId;
-        private string _lastFm;
-        private string _mySpace;
-        private string _fullname;
-        private string _about;
-        private string _url;
-        #endregion
-
-        #region Properties
         [JsonPropertyName("flickr")]
-        public string Flickr
-        {
-            get => this._flickr;
-            set => this._flickr = value;
-        }
+        public string Flickr { get; set; }
 
         [JsonPropertyName("twitter")]
-        public string Twitter
-        {
-            get => this._twitter;
-            set => this._twitter = value;
-        }
+        public string Twitter { get; set; }
 
         [JsonPropertyName("website")]
-        public string Website
-        {
-            get => this._website;
-            set => this._website = value;
-        }
+        public string Website { get; set; }
 
         [JsonPropertyName("userId")]
-        public string UserId
-        {
-            get => this._userId;
-            set => this._userId = value;
-        }
+        public string UserId { get; set; }
 
         [JsonPropertyName("lastFm")]
-        public string LastFm
-        {
-            get => this._lastFm;
-            set => this._lastFm = value;
-        }
+        public string LastFm { get; set; }
 
         [JsonPropertyName("mySpace")]
-        public string MySpace
-        {
-            get => this._mySpace;
-            set => this._mySpace = value;
-        }
+        public string MySpace { get; set; }
 
         [JsonPropertyName("fullname")]
-        public string Fullname
-        {
-            get => this._fullname;
-            set => this._fullname = value;
-        }
+        public string Fullname { get; set; }
 
         [JsonPropertyName("about")]
-        public string About
-        {
-            get => this._about;
-            set => this._about = value;
-        }
+        public string About { get; set; }
 
         [JsonPropertyName("url")]
-        public string Url
-        {
-            get => this._url;
-            set => this._url = value;
-        }
-        #endregion
+        public string Url { get; set; }
 
-        public override string ToString()
-        {
-            return "UserId = " + UserId;
-        }
+        public override string ToString() => UserId;
     }
 }

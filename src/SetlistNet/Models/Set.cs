@@ -9,63 +9,29 @@ namespace SetlistNet.Models
     /// </summary>
     public class Set
     {
-        #region Private Fields
-        private int? _encore;
-        private bool _encoreSpecified;
-        private string _name;
-        private List<Song> _songs;
-        #endregion
-
-        #region Properties
         /// <summary>
         /// If the set is an encore, this property gets or sets the number of the encore, starting with 1 for the first encore, 2 for the second and so on.
         /// </summary>
         [JsonPropertyName("encore")]
-        public int Encore
-        {
-            get => this._encore.GetValueOrDefault();
-            set
-            {
-                this._encore = value;
-                this._encoreSpecified = true;
-            }
-        }
-        /// <summary>
-        /// Gets or sets whether the "Encore" property should be included in the output.
-        /// </summary>
-        public bool EncoreSpecified
-        {
-            get => this._encoreSpecified;
-            set => this._encoreSpecified = value;
-        }
+        public int? Encore { get; set; }
+
         /// <summary>
         /// Gets or sets the description/name of the set. E.g. "Acoustic set" or "Paul McCartney solo".
         /// </summary>
-        public string Name
-        {
-            get => this._name;
-            set => this._name = value;
-        }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
         /// <summary>
         /// Gets or sets this set's songs.
         /// </summary>
         [JsonPropertyName("song")]
-        public List<Song> Songs
-        {
-            get => this._songs;
-            set => this._songs = value;
-        }
-        #endregion
+        public List<Song> Songs { get; set; }
 
         public override string ToString()
         {
-            var encore = "";
-            if (EncoreSpecified)
-            {
-                encore = "[Encore " + Encore + "] ";
-            }
+            var encore = Encore.HasValue ? "[Encore " + Encore + "] " : string.Empty;
 
-            return $"{encore}Songs = {Songs.Count}";
+            return $"{encore}{Name}";
         }
     }
 }

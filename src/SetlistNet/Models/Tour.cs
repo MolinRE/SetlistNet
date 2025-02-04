@@ -4,17 +4,11 @@ namespace SetlistNet.Models
 {
     public class Tour
     {
-        private string _name;
-
         /// <summary>
-        /// Gets or sets the city's name, depending on the language valid values are e.g. "Mchen" or "Munich".
+        /// Gets or sets the city's name, depending on the language valid values are "München" or "Munich".
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name
-        {
-            get => this._name;
-            set => this._name = value;
-        }
+        public string Name { get; set; }
 
         public Tour()
         {
@@ -25,9 +19,6 @@ namespace SetlistNet.Models
             Name = name;
         }
 
-        public override string ToString()
-        {
-            return "Name = " + Name;
-        }
+        public override string ToString() => Name;
     }
 }

@@ -10,51 +10,31 @@ namespace SetlistNet.Models
     /// </summary>
     public abstract class ApiArrayResult<T> : IList<T>
     {
-        #region Private Fields
-        private int _total;
-        private int _page;
-        private int _itemsPerPage;
-        private string _apiType;
         protected List<T> _items;
-        #endregion
 
         /// <summary>
         /// Gets or sets the total amount of items matching the query.
         /// </summary>
         [JsonPropertyName("total")]
-        public int Total
-        {
-            get => this._total;
-            set => this._total = value;
-        }
+        public int Total { get; set; }
+
         /// <summary>
         /// Gets or sets current page.
         /// </summary>
         [JsonPropertyName("page")]
-        public int Page
-        {
-            get => this._page;
-            set => this._page = value;
-        }
+        public int Page { get; set; }
+
         /// <summary>
         /// Gets or sets the amount of items you get per page.
         /// </summary>
         [JsonPropertyName("itemsPerPage")]
-        public int ItemsPerPage
-        {
-            get => this._itemsPerPage;
-            set => this._itemsPerPage = value;
-        }
+        public int ItemsPerPage { get; set; }
 
         /// <summary>
         /// Gets or sets the property "type" of an object.
         /// </summary>
         [JsonPropertyName("type")]
-        public string ApiType
-        {
-            get => _apiType;
-            set => _apiType = value;
-        }
+        public string ApiType { get; set; }
 
         /// <summary>
         /// Gets the total amount of pages returned by API.
@@ -67,32 +47,28 @@ namespace SetlistNet.Models
                 {
                     return 0;
                 }
-                else
-                    if (ItemsPerPage > Total)
-                    {
-                        return 1;
-                    }
-                    else
+
+                if (ItemsPerPage > Total)
                 {
-                    return (int)Math.Floor((double)Total / ItemsPerPage);
+                    return 1;
                 }
+
+                return (int)Math.Floor((double)Total / ItemsPerPage);
             }
         }
 
 
         public ApiArrayResult()
         {
-            _items = new List<T>();
+            _items = new();
         }
 
-        #region Interface implementation
-        #region ICollection<T>
         /// <summary>
         /// Gets Count property of inner list.
         /// </summary>
-        public int Count => _items?.Count ?? 0;
+        public int Count => _items.Count;
 
-        public bool IsReadOnly => ((IList)_items).IsReadOnly;
+        public bool IsReadOnly => false;
 
         public void Add(T item)
         {
@@ -104,38 +80,25 @@ namespace SetlistNet.Models
             _items.Clear();
         }
 
-        public bool Contains(T item)
-        {
-            return _items.Contains(item);
-        }
+        public bool Contains(T item) => _items.Contains(item);
 
         public void CopyTo(T[] array, int arrayIndex)
         {
             _items.CopyTo(array, arrayIndex);
         }
 
-        public bool Remove(T item)
-        {
-            return _items.Remove(item);
-        }
-        #endregion
+        public bool Remove(T item) => _items.Remove(item);
 
-        #region IEnumerbale
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return _items.GetEnumerator();
-        }
-        #endregion
+        IEnumerator IEnumerable.GetEnumerator() => _items.GetEnumerator();
 
-        #region IEnumerable<T>
         public IEnumerator<T> GetEnumerator()
         {
             foreach (var artist in _items)
+            {
                 yield return artist;
+            }
         }
-        #endregion
 
-        #region IList<T>
         public T this[int key]
         {
             get => _items[key];
@@ -156,7 +119,5 @@ namespace SetlistNet.Models
         {
             _items.RemoveAt(index);
         }
-        #endregion
-        #endregion
     }
 }

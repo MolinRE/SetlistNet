@@ -9,118 +9,68 @@ namespace SetlistNet.Models
     /// </summary>
     public class Artist 
     {
-        #region Private Fields
-        private string _disambiguation;
-        private string _mbid;
-        private int? _tmid;
-        private bool _tmidSpecified;
-        private string _name;
-        private string _sortName;
-        private string _url;
-        #endregion
-
-        #region Properties
         /// <summary>
         /// Disambiguation to distinguish between artists with same names.
         /// </summary>
         [JsonPropertyName("disambiguation")]
-        public string Disambiguation
-        {
-            get => this._disambiguation;
-            set => this._disambiguation = value;
-        }
+        public string Disambiguation { get; set; }
+
         /// <summary>
-        /// Gets or sets unique Musicbrainz Identifier (MBID), e.g. "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d" (The Beatles).
+        /// Gets or sets unique Musicbrainz Identifier (MBID)
         /// </summary>
+        /// <example>"b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d" (The Beatles)</example>
         [JsonPropertyName("mbid")]
-        public string MBID
-        {
-            get => this._mbid;
-            set => this._mbid = value;
-        }
+        public string MBID { get; set; }
+
         /// <summary>
-        /// Gets or sets unique Ticket Master Identifier (TMID), e.g. 1953.
+        /// Gets or sets unique Ticket Master Identifier
         /// </summary>
+        /// <example>1953</example>
         [JsonPropertyName("tmid")]
-        public int TMID
-        {
-            get => this._tmid.GetValueOrDefault();
-            set
-            {
-                this._tmid = value;
-                this._tmidSpecified = true;
-            }
-        }
-        /// <summary>
-        /// Gets or sets the <paramref name="TMID"/> property should be included in the output.
-        /// </summary>
-        public bool TMIDSpecified
-        {
-            get => this._tmidSpecified;
-            set => this._tmidSpecified = value;
-        }
+        public int? TMID { get; set; }
+
         /// <summary>
         /// Gets or sets the artist's name, e.g. "The Beatles" or "Bruce Springsteen".
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name
-        {
-            get => this._name;
-            set => this._name = value;
-        }
+        public string Name { get; set; }
+
         /// <summary>
         /// Gets or sets the artist's sort name, e.g. "Beatles, The" or "Springsteen, Bruce".
         /// </summary>
         [JsonPropertyName("sortName")]
-        public string SortName
-        {
-            get => this._sortName;
-            set => this._sortName = value;
-        }
+        public string SortName { get; set; }
+
         /// <summary>
         /// Gets or sets the url to artist's setlists' page on Setlist.fm.
         /// </summary>
         [JsonPropertyName("url")]
-        public string Url
-        {
-            get => this._url;
-            set => this._url = value;
-        }
+        public string Url { get; set; }
 
         /// <summary>
         /// Gets the url to artist's stats' page on Setlist.fm.
         /// </summary>
         public string UrlStats => Url.Replace("/setlists/", "/stats/");
 
-        public string NameWithDisambiguation
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(Disambiguation))
-                {
-                    return Name;
-                }
-                else
-                {
-                    return Name + " (" + Disambiguation + ")";
-                }
-            }
-        }
-        #endregion
-
         public Artist()
         {
         }
 
         public Artist(string name)
-            : this()
         {
             Name = name;
         }
 
-        public override string ToString()
+        public string GetNameWithDisambiguation()
         {
-            return "Name = " + Name;
+            if (string.IsNullOrEmpty(Disambiguation))
+            {
+                return Name;
+            }
+
+            return Name + " (" + Disambiguation + ")";
         }
+
+        public override string ToString() => Name;
     }
 }

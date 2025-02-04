@@ -7,10 +7,20 @@ using System.Threading.Tasks;
 
 namespace SetlistNet
 {
-    public class SetlistApi(string apiToken, string desiredLanguage = "en")
+    public class SetlistApi
     {
         private const string Host = "https://api.setlist.fm";
         private const string ApiVersion = "1.0";
+        
+        private readonly HttpClient _httpClient;
+
+        public SetlistApi(string apiToken, string desiredLanguage = "en", HttpClient? httpClient = null)
+        {
+            _httpClient = httpClient ?? new HttpClient();
+            _httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+            _httpClient.DefaultRequestHeaders.Add("x-api-key", apiToken);
+            _httpClient.DefaultRequestHeaders.Add("Accept-Language", desiredLanguage);
+        }
 
         public Task<Artist> Artist(string mbid) => Load<Artist>($"/artist/{mbid}");
 
@@ -39,7 +49,7 @@ namespace SetlistNet
                     query.AppendFormat("artistMbid={0}&", searchFields.MBID);
                 }
 
-                if (searchFields.TMIDSpecified)
+                if (searchFields.TMID.HasValue)
                 {
                     query.AppendFormat("artistTmid={0}&", searchFields.TMID);
                 }
@@ -101,107 +111,118 @@ namespace SetlistNet
         public Task<Countries> SearchCountries() => Load<Countries>("/search/countries");
 
         /// <summary>
-        /// Search for setlists.
+        /// Search for setlists
         /// </summary>
-        /// <param name="searchFields">
-        /// You must provide a value for at least one of the following properties:
-        /// <para>Tour, LastUpdated, EventDate (you could set only a year, e.g. <code>00-00-2007</code>),</para>
-        /// <para>Artist.Name, Artist.MBID, Artist.TMID (set <code>TMIDSpecified = true</code>)</para>
-        /// <para>Venue.Id, Venue.Name, Venue.City.Id, Venue.City.Name. Venue.City.State, Venue.City.State.Code, Venue.City.Country.Code</para>
-        /// </param>
-        /// <param name="page">Page number to fetch</param>
-        /// <returns>A list of matching setlists</returns>
-        public Task<Setlists> SearchSetlists(Setlist searchFields, int page = 1)
+        /// <param name="artistMbid">the artist's Musicbrainz Identifier (mbid)</param>
+        /// <param name="artistName">the artist's name</param>
+        /// <param name="artistTmid">the artist's Ticketmaster Identifier (tmid)</param>
+        /// <param name="cityId">the city's geoId</param>
+        /// <param name="cityName">the name of the city</param>
+        /// <param name="countryCode">the country code</param>
+        /// <param name="date">the date of the event</param>
+        /// <param name="lastUpdated">the date and time (UTC) when this setlist was last updated - either edited or reverted. search will return setlists that were updated on or after this date</param>
+        /// <param name="cityState">the state</param>
+        /// <param name="cityStateCode">the state code</param>
+        /// <param name="tourName">The name of the tour a setlist was a part of.</param>
+        /// <param name="venueId">the venue id</param>
+        /// <param name="venueName">the name of the venue</param>
+        /// <param name="year">the year of the event</param>
+        /// <param name="page">the number of the result page</param>
+        /// <returns>a list of matching setlists</returns>
+        public Task<Setlists> SearchSetlists(
+            string? artistMbid = null,
+            string? artistName = null,
+            int? artistTmid = null,
+            string? cityId = null,
+            string? cityName = null,
+            string? countryCode = null,
+            DateTime? date = null,
+            DateTime? lastUpdated = null,
+            string? cityState = null,
+            string? cityStateCode = null,
+            string? tourName = null,
+            string? venueId = null,
+            string? venueName = null,
+            int? year = null,
+            int page = 1)
         {
             var query = new StringBuilder();
-            if (searchFields != null)
+            if (tourName != null)
             {
-                if (!string.IsNullOrEmpty(searchFields.TourName))
-                {
-                    query.AppendFormat("tour={0}&", searchFields.Tour);
-                }
-
-                if (!string.IsNullOrEmpty(searchFields.LastUpdated))
-                {
-                    query.AppendFormat("lastUpdate={0}&", searchFields.LastUpdated);
-                }
-
-                if (!string.IsNullOrEmpty(searchFields.EventDate))
-                {
-                    if (searchFields.GetEventDateTime() != null)
-                    {
-                        query.AppendFormat("date={0}&", searchFields.EventDate);
-                    }
-                    else
-                        if (searchFields.GetYear() != 0)
-                    {
-                        query.AppendFormat("year={0}&", searchFields.GetYear());
-                    }
-                }
-
-                if (searchFields.Artist != null)
-                {
-                    if (!string.IsNullOrEmpty(searchFields.Artist.MBID))
-                    {
-                        query.AppendFormat("artistMbid={0}&", searchFields.Artist.MBID);
-                    }
-
-                    if (searchFields.Artist.TMIDSpecified)
-                    {
-                        query.AppendFormat("artistTmid={0}&", searchFields.Artist.TMID);
-                    }
-
-                    if (!string.IsNullOrEmpty(searchFields.Artist.Name))
-                    {
-                        query.AppendFormat("artistName={0}&", searchFields.Artist.Name);
-                    }
-                }
-                if (searchFields.Venue != null)
-                {
-                    if (!string.IsNullOrEmpty(searchFields.Venue.Id))
-                    {
-                        query.AppendFormat("venueId={0}&", searchFields.Venue.Id);
-                    }
-
-                    if (!string.IsNullOrEmpty(searchFields.Venue.Name))
-                    {
-                        query.AppendFormat("venueName={0}&", searchFields.Venue.Name);
-                    }
-
-                    if (searchFields.Venue.City != null)
-                    {
-                        if (searchFields.Venue.City.Id != "0" && searchFields.Venue.City.Id != "")
-                        {
-                            query.AppendFormat("cityId={0}&", searchFields.Venue.City.Id);
-                        }
-
-                        if (!string.IsNullOrEmpty(searchFields.Venue.City.Name))
-                        {
-                            query.AppendFormat("cityName={0}&", searchFields.Venue.City.Name);
-                        }
-
-                        if (!string.IsNullOrEmpty(searchFields.Venue.City.State))
-                        {
-                            query.AppendFormat("state={0}&", searchFields.Venue.City.State);
-                        }
-
-                        if (!string.IsNullOrEmpty(searchFields.Venue.City.StateCode))
-                        {
-                            query.AppendFormat("stateCode={0}&", searchFields.Venue.City.StateCode);
-                        }
-
-                        if (searchFields.Venue.City.Country != null)
-                        {
-                            if (!string.IsNullOrEmpty(searchFields.Venue.City.Country.Code))
-                            {
-                                query.AppendFormat("countryCode={0}&", searchFields.Venue.City.Country.Code);
-                            }
-                        }
-                    }
-                }
+                query.AppendFormat("tour={0}&", tourName);
             }
 
-            return Load<Setlists>($"/search/setlists?{query}p={page.ToString()}");
+            if (lastUpdated.HasValue)
+            {
+                query.AppendFormat("lastUpdate={0::yyyyMMddHHmmss}&", lastUpdated.Value.ToUniversalTime());
+            }
+
+            if (date.HasValue)
+            {
+                query.AppendFormat("date={0:dd-MM-yyyy}&", date.Value.ToUniversalTime());
+            }
+
+            if (year.HasValue)
+            {
+                query.AppendFormat("year={0}&", year);
+            }
+
+            if (!string.IsNullOrEmpty(artistMbid))
+            {
+                query.AppendFormat("artistMbid={0}&", artistMbid);
+            }
+
+            if (artistTmid.HasValue)
+            {
+                query.AppendFormat("artistTmid={0}&", artistTmid);
+            }
+
+            if (!string.IsNullOrEmpty(artistName))
+            {
+                query.AppendFormat("artistName={0}&", artistName);
+            }
+
+            if (!string.IsNullOrEmpty(venueId))
+            {
+                query.AppendFormat("venueId={0}&", venueId);
+            }
+
+            if (!string.IsNullOrEmpty(venueName))
+            {
+                query.AppendFormat("venueName={0}&", venueName);
+            }
+
+            if (!string.IsNullOrEmpty(cityId) && cityId != "0")
+            {
+                query.AppendFormat("cityId={0}&", cityId);
+            }
+
+            if (!string.IsNullOrEmpty(cityName))
+            {
+                query.AppendFormat("cityName={0}&", cityName);
+            }
+
+            if (!string.IsNullOrEmpty(cityState))
+            {
+                query.AppendFormat("state={0}&", cityState);
+            }
+
+            if (!string.IsNullOrEmpty(cityStateCode))
+            {
+                query.AppendFormat("stateCode={0}&", cityStateCode);
+            }
+
+            if (!string.IsNullOrEmpty(countryCode))
+            {
+                query.AppendFormat("countryCode={0}&", countryCode);
+            }
+
+            if (query.Length == 0)
+            {
+                throw new Exception("No search criteria specified");
+            }
+
+            return Load<Setlists>($"/search/setlists?{query}p={page}");
         }
 
         /// <summary>
@@ -299,18 +320,14 @@ namespace SetlistNet
 
         public Task<Setlists> VenueSetlists(string venueId, int page = 1) => Load<Setlists>($"/venue/{venueId}/setlists?p={page}");
 
-        private async Task<T> Load<T>(string url)
+        private async Task<T> Load<T>(string pathAndQuery)
         {
-            var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
-            client.DefaultRequestHeaders.Add("x-api-key", apiToken);
-            client.DefaultRequestHeaders.Add("Accept-Language", desiredLanguage);
+            using var request = new HttpRequestMessage(HttpMethod.Get, new Uri($"{Host}/rest/{ApiVersion}{pathAndQuery}"));
+            using var response = await _httpClient.SendAsync(request);
 
-            var request = new HttpRequestMessage(HttpMethod.Get, new Uri(Host + "/rest/" + ApiVersion + url));
-
-            var response = await client.SendAsync(request);
-
+#pragma warning disable CS8603 // Possible null reference return.
             return await JsonSerializer.DeserializeAsync<T>(await response.Content.ReadAsStreamAsync());
+#pragma warning restore CS8603 // Possible null reference return.
         }
     }
 }
