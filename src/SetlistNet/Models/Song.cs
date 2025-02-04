@@ -32,7 +32,7 @@ public class Song(string name, Artist? with, Artist? cover, string? info, bool t
     /// <seealso cref="!:https://www.setlist.fm/guidelines"/>
     /// </summary>
     [JsonPropertyName("info")]
-    public string Info { get; set; } = info;
+    public string? Info { get; set; } = info;
 
     /// <summary>
     /// The song came from tape rather than being performed live.
