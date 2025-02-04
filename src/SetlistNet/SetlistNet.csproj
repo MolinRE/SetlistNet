@@ -10,12 +10,12 @@
     <PackageTags>setlist.fm, setlist, concerts, shows, live</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
     <LangVersion>latestmajor</LangVersion>
-    <PackageVersion>1.2.0</PackageVersion>
+    <PackageVersion>2.0.0-beta.1</PackageVersion>
     <Title>SetlistNet</Title>
     <PackageProjectUrl>https://github.com/MolinRE/SetlistNet</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>1.2.0.0</AssemblyVersion>
-    <FileVersion>1.2.0.0</FileVersion>
+    <AssemblyVersion>2.0.0.1</AssemblyVersion>
+    <FileVersion>2.0.0.1</FileVersion>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
