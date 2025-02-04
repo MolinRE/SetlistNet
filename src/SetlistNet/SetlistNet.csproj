@@ -17,10 +17,7 @@
     <AssemblyVersion>2.0.0.1</AssemblyVersion>
     <FileVersion>2.0.0.1</FileVersion>
     <Nullable>enable</Nullable>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\Users\Konstantin\source\git\SetlistNet\SetlistNet\SetlistNet.xml</DocumentationFile>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
