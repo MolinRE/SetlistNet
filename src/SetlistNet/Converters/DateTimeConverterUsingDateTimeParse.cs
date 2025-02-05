@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace SetlistNet;
+namespace SetlistNet.Converters;
 
 public class DateTimeConverterUsingDateTimeParse : JsonConverter<DateTime>
 {

@@ -5,7 +5,7 @@ namespace SetlistNet.Models;
 /// <summary>
 /// This class represents a city where Venues are located. 
 /// Most of the original city data was taken from <a href="http://geonames.org">Geonames.org</a>.
-/// <seealso cref="http://geonames.org"/>
+/// <seealso cref="!:http://geonames.org"/>
 /// </summary>
 public class City(string id, string name, Coords coords, Country country, string? state, string? stateCode)
 {

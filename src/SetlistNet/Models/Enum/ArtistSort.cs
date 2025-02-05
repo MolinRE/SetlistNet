@@ -1,4 +1,4 @@
-﻿namespace SetlistNet;
+﻿namespace SetlistNet.Models.Enum;
 
 public enum ArtistSort
 {

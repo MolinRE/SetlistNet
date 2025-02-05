@@ -13,5 +13,8 @@ public class User(string userId, string url)
     [JsonPropertyName("url")]
     public string Url { get; set; } = url;
 
-    public override string ToString() => UserId;
+    public override string ToString()
+    {
+        return UserId;
+    }
 }

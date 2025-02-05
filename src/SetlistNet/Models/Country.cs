@@ -22,5 +22,8 @@ public class Country(string name, string code)
     [JsonPropertyName("code")]
     public string Code { get; set; } = code;
 
-    public override string ToString() => Name;
+    public override string ToString()
+    {
+        return Name;
+    }
 }

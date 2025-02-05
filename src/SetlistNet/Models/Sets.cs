@@ -3,16 +3,16 @@ using System.Text.Json.Serialization;
 
 namespace SetlistNet.Models;
 
-public class Sets
+public class Sets(IReadOnlyList<Set> set)
 {
     /// <summary>
     /// Gets or sets the collection of sets
     /// </summary>
     [JsonPropertyName("set")]
-    public IReadOnlyCollection<Set> SetCollection { get; set; }
+    public IReadOnlyList<Set> Set { get; set; } = set;
 
     public override string ToString()
     {
-        return $"Count = {SetCollection.Count}";
+        return $"Count = {Set.Count}";
     }
 }

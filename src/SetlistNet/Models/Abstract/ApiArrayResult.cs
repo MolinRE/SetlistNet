@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.Json.Serialization;
 
-namespace SetlistNet.Models;
+namespace SetlistNet.Models.Abstract;
 
 /// <summary>
 /// This is an abstract class, that represents a set of items, returned by API
@@ -30,7 +30,7 @@ public abstract class ApiArrayResult
     /// Gets or sets the property "type" of an object
     /// </summary>
     [JsonPropertyName("type")]
-    public string ApiType { get; set; }
+    public string? ApiType { get; set; }
 
     /// <summary>
     /// Gets the total amount of pages returned by API

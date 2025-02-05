@@ -46,5 +46,8 @@ public class Song(string name, Artist? with, Artist? cover, string? info, bool t
     /// Returns the <see cref="Name"/> propertu of the object.
     /// </summary>
     /// <returns>A string that represents <see cref="Name"/> property</returns>
-    public override string ToString() => Name;
+    public override string ToString()
+    {
+        return Name;
+    }
 }

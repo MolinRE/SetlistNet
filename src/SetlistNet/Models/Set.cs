@@ -8,7 +8,7 @@ namespace SetlistNet.Models;
 /// Sets can either be sets as defined in the <a href="http://www.setlist.fm/guidelines">Guidelines</a> or encores.
 /// <seealso cref="!:http://www.setlist.fm/guidelines"/>
 /// </summary>
-public class Set(IReadOnlyCollection<Song> songs, string? name, int? encore)
+public class Set(IReadOnlyList<Song> songs, string? name, int? encore)
 {
     /// <summary>
     /// If the set is an encore, this property gets or sets the number of the encore,
@@ -28,7 +28,7 @@ public class Set(IReadOnlyCollection<Song> songs, string? name, int? encore)
     /// Gets or sets this set's songs
     /// </summary>
     [JsonPropertyName("song")]
-    public IReadOnlyCollection<Song> Songs { get; set; } = songs;
+    public IReadOnlyList<Song> Songs { get; set; } = songs;
 
     public override string ToString()
     {

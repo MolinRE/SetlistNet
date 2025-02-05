@@ -1,4 +1,8 @@
-﻿using SetlistNet.Models;
+﻿using SetlistNet.Converters;
+using SetlistNet.Exceptions;
+using SetlistNet.Models;
+using SetlistNet.Models.ArrayResult;
+using SetlistNet.Models.Enum;
 using System;
 using System.Net.Http;
 using System.Text;
@@ -28,9 +32,22 @@ public class SetlistApi
         };
     }
 
-    public Task<Artist> Artist(string mbid) => Load<Artist>($"/artist/{mbid}");
+    public Task<Artist> Artist(string mbid)
+    {
+        NoSearchCriteriaSpecifiedException.ThrowIfNullOrWhiteSpace(mbid);
+        return Load<Artist>($"/artist/{mbid}");
+    }
 
-    public Task<City> City(int geoId) => Load<City>($"/city/{geoId}");
+    public Task<City> City(int geoId)
+    {
+        return Load<City>($"/city/{geoId}");
+    }
+
+    public Task<City> City(string geoId)
+    {
+        NoSearchCriteriaSpecifiedException.ThrowIfNullOrWhiteSpace(geoId);
+        return Load<City>($"/city/{geoId}");
+    }
 
     public Task<Artists> SearchArtists(
         string? artistMbid = null,
@@ -58,7 +75,7 @@ public class SetlistApi
 
         if (query.Length == 0)
         {
-            throw new Exception("No search criteria specified");
+            throw new NoSearchCriteriaSpecifiedException("Not Found: no search criteria specified");
         }
 
         query.AppendFormat("sort={0}", sort == ArtistSort.Name ? "sortName" : "relevance");
@@ -98,13 +115,16 @@ public class SetlistApi
 
         if (query.Length == 0)
         {
-            throw new Exception("No search criteria specified");
+            throw new NoSearchCriteriaSpecifiedException("Not Found: no search criteria specified");
         }
             
         return Load<Cities>($"/search/cities?{query}p={page}");
     }
 
-    public Task<Countries> SearchCountries() => Load<Countries>("/search/countries");
+    public Task<Countries> SearchCountries()
+    {
+        return Load<Countries>("/search/countries");
+    }
 
     /// <summary>
     /// Search for setlists
@@ -215,7 +235,7 @@ public class SetlistApi
 
         if (query.Length == 0)
         {
-            throw new Exception("No search criteria specified");
+            throw new NoSearchCriteriaSpecifiedException("Not Found: no search criteria specified");
         }
 
         return Load<Setlists>($"/search/setlists?{query}p={page}");
@@ -276,7 +296,7 @@ public class SetlistApi
 
         if (query.Length == 0)
         {
-            throw new Exception("No search criteria specified");
+            throw new NoSearchCriteriaSpecifiedException("Not Found: no search criteria specified");
         }
 
         return Load<Venues>($"/search/venues?{query}p={page.ToString()}");
@@ -287,13 +307,29 @@ public class SetlistApi
     /// </summary>
     /// <param name="setlistId">Setlist id</param>
     /// <returns>The setlist for the provided id</returns>
-    public Task<Setlist> Setlist(string setlistId) => Load<Setlist>($"/setlist/{setlistId}");
+    public Task<Setlist> Setlist(string setlistId)
+    {
+        NoSearchCriteriaSpecifiedException.ThrowIfNullOrWhiteSpace(setlistId);
+        return Load<Setlist>($"/setlist/{setlistId}");
+    }
 
-    public Task<User> User(string userId) => Load<User>($"/user/{userId}");
+    public Task<User> User(string userId)
+    {
+        NoSearchCriteriaSpecifiedException.ThrowIfNullOrWhiteSpace(userId);
+        return Load<User>($"/user/{userId}");
+    }
 
-    public Task<Venue> Venue(string venueId) => Load<Venue>($"/venue/{venueId}");
+    public Task<Venue> Venue(string venueId)
+    {
+        NoSearchCriteriaSpecifiedException.ThrowIfNullOrWhiteSpace(venueId);
+        return Load<Venue>($"/venue/{venueId}");
+    }
 
-    public Task<Setlists> ArtistSetlists(string mbid, int page = 1) => Load<Setlists>($"/artist/{mbid}/setlists?p={page}");
+    public Task<Setlists> ArtistSetlists(string mbid, int page = 1)
+    {
+        NoSearchCriteriaSpecifiedException.ThrowIfNullOrWhiteSpace(mbid);
+        return Load<Setlists>($"/artist/{mbid}/setlists?p={page}");
+    }
 
     /// <summary>
     /// Returns a setlist for the given versionId. The setlist returned isn't necessarily the most recent version.
@@ -301,7 +337,11 @@ public class SetlistApi
     /// </summary>
     /// <param name="versionId">The version ID</param>
     /// <returns>The setlist for the provided versionId</returns>
-    public Task<Setlist> SetlistVersion(string versionId) => Load<Setlist>($"/setlist/version/{versionId}");
+    public Task<Setlist> SetlistVersion(string versionId)
+    {
+        NoSearchCriteriaSpecifiedException.ThrowIfNullOrWhiteSpace(versionId);
+        return Load<Setlist>($"/setlist/version/{versionId}");
+    }
 
     /// <summary>
     /// Get a list of setlists of concerts attended by a user.
@@ -309,7 +349,11 @@ public class SetlistApi
     /// <param name="userId">A user's userId</param>
     /// <param name="page">Page number to fetch</param>
     /// <returns>A list of setlists</returns>
-    public Task<Setlists> UserAttended(string userId, int page = 1) => Load<Setlists>($"/user/{userId}/attended?p={page}");
+    public Task<Setlists> UserAttended(string userId, int page = 1)
+    {
+        NoSearchCriteriaSpecifiedException.ThrowIfNullOrWhiteSpace(userId);
+        return Load<Setlists>($"/user/{userId}/attended?p={page}");
+    }
 
     /// <summary>
     /// Get a list of setlists of concerts edited by a user. 
@@ -318,9 +362,17 @@ public class SetlistApi
     /// <param name="userId">The user's userId</param>
     /// <param name="page">Page number to fetch</param>
     /// <returns>A list of setlists</returns>
-    public Task<Setlists> UserEdited(string userId, int page = 1) => Load<Setlists>($"/user/{userId}/edited?p={page}");
+    public Task<Setlists> UserEdited(string userId, int page = 1)
+    {
+        NoSearchCriteriaSpecifiedException.ThrowIfNullOrWhiteSpace(userId);
+        return Load<Setlists>($"/user/{userId}/edited?p={page}");
+    }
 
-    public Task<Setlists> VenueSetlists(string venueId, int page = 1) => Load<Setlists>($"/venue/{venueId}/setlists?p={page}");
+    public Task<Setlists> VenueSetlists(string venueId, int page = 1)
+    {
+        NoSearchCriteriaSpecifiedException.ThrowIfNullOrWhiteSpace(venueId);
+        return Load<Setlists>($"/venue/{venueId}/setlists?p={page}");
+    }
 
     private async Task<T> Load<T>(string pathAndQuery)
     {

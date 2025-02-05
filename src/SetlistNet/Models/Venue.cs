@@ -38,5 +38,8 @@ public class Venue(string id, string name, City city, string url)
     [JsonPropertyName("url")]
     public string Url { get; set; } = url;
 
-    public override string ToString() => Name;
+    public override string ToString()
+    {
+        return Name;
+    }
 }
