@@ -49,7 +49,7 @@ public abstract class ApiArrayResult
                 return 1;
             }
 
-            return (int)Math.Floor((double)Total / ItemsPerPage);
+            return (int)Math.Ceiling((double)Total / ItemsPerPage);
         }
     }
 }
