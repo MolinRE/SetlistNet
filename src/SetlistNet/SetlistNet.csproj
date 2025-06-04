@@ -24,7 +24,7 @@
         <PackageTags>setlist.fm, setlist, concerts, shows, live</PackageTags>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageReleaseNotes>UserAgent fixed</PackageReleaseNotes>
+        <PackageReleaseNotes></PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>

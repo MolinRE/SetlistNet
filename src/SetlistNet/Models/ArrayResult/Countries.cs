@@ -13,10 +13,7 @@ public class Countries(IReadOnlyList<Country> country) : ApiArrayResult
     /// Gets or sets the list of countries.
     /// </summary>
     [JsonPropertyName("country")]
-    public IReadOnlyList<Country> Country { get; set; } = country;
+    public IReadOnlyList<Country>? Country { get; set; } = country;
 
-    public override string ToString()
-    {
-        return $"Count = {Country?.Count ?? 0}";
-    }
+    public override string ToString() => $"Count = {Country?.Count ?? 0}";
 }

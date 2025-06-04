@@ -89,8 +89,5 @@ public class Setlist(
     [JsonPropertyName("lastUpdated")]
     public DateTime LastUpdated { get; set; } = lastUpdated;
 
-    public override string ToString()
-    {
-        return $"[{EventDate:dd-MM-yyyy}] {Artist.Name} @ {Venue.Name}";
-    }
+    public override string ToString() => $"[{EventDate:dd-MM-yyyy}] {Artist.Name} @ {Venue.Name}";
 }

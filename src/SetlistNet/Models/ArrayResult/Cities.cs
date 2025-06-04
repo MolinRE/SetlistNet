@@ -15,8 +15,5 @@ public class Cities(IReadOnlyList<City> items) : ApiArrayResult
     [JsonPropertyName("cities")]
     public IReadOnlyList<City> Items { get; set; } = items;
 
-    public override string ToString()
-    {
-        return $"Count = {Items.Count}";
-    }
+    public override string ToString() => $"Count = {Items.Count}";
 }

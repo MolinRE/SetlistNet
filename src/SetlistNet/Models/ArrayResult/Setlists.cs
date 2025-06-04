@@ -15,8 +15,5 @@ public class Setlists(IReadOnlyList<Setlist> setlist) : ApiArrayResult
     [JsonPropertyName("setlist")]
     public IReadOnlyList<Setlist> Setlist { get; set; } = setlist;
 
-    public override string ToString()
-    {
-        return $"Count = {Setlist.Count}";
-    }
+    public override string ToString() => $"Count = {Setlist.Count}";
 }

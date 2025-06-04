@@ -23,8 +23,5 @@ public class Coords(double longitude, double latitude)
     /// Returns latitude and longitude in the format <c>lat,long</c>
     /// </summary>
     /// <returns>String representing latitude and longitude separated by comma</returns>
-    public override string ToString()
-    {
-        return $"{Latitude}, {Longitude}";
-    }
+    public override string ToString() => $"{Latitude}, {Longitude}";
 }

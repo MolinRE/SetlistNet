@@ -52,10 +52,7 @@ public class Artist(string name, string mbid, string url, string sortName, strin
     /// <summary>
     /// Gets the url to artist's stats' page on Setlist.fm.
     /// </summary>
-    public string UrlStats
-    {
-        get { return Url.Replace("/setlists/", "/stats/"); }
-    }
+    public string UrlStats => Url.Replace("/setlists/", "/stats/");
 
     public string GetNameWithDisambiguation()
     {
@@ -67,8 +64,5 @@ public class Artist(string name, string mbid, string url, string sortName, strin
         return Name + " (" + Disambiguation + ")";
     }
 
-    public override string ToString()
-    {
-        return Name;
-    }
+    public override string ToString() => Name;
 }

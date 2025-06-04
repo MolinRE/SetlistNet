@@ -15,8 +15,5 @@ public class Artists(IReadOnlyList<Artist> artist) : ApiArrayResult
     [JsonPropertyName("artist")]
     public IReadOnlyList<Artist> Artist { get; set; } = artist;
 
-    public override string ToString()
-    {
-        return $"Count = {Artist.Count}";
-    }
+    public override string ToString() => $"Count = {Artist.Count}";
 }

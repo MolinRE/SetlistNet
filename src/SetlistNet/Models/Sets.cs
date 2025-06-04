@@ -11,8 +11,5 @@ public class Sets(IReadOnlyList<Set> set)
     [JsonPropertyName("set")]
     public IReadOnlyList<Set> Set { get; set; } = set;
 
-    public override string ToString()
-    {
-        return $"Count = {Set.Count}";
-    }
+    public override string ToString() => $"Count = {Set.Count}";
 }
