@@ -1,27 +1,39 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <Authors>Konstantin Komarov</Authors>
-    <Description>C# library to interact with setlist.fm API. It's currently supports all methods listed in the API REST Endpoints section, such as Setlists Search or getting Artist by MBID</Description>
-    <Copyright>Konstantin Komarov</Copyright>
-    <RepositoryUrl>https://github.com/MolinRE/SetlistNet</RepositoryUrl>
-    <RepositoryType>GitHub</RepositoryType>
-    <PackageTags>setlist.fm, setlist, concerts, shows, live</PackageTags>
-    <NeutralLanguage>en</NeutralLanguage>
-    <LangVersion>latestmajor</LangVersion>
-    <PackageVersion>2.0.0-beta.1</PackageVersion>
-    <Title>SetlistNet</Title>
-    <PackageProjectUrl>https://github.com/MolinRE/SetlistNet</PackageProjectUrl>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>2.0.0.1</AssemblyVersion>
-    <FileVersion>2.0.0.1</FileVersion>
-    <Nullable>enable</Nullable>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <AssemblyName>SetlistNet</AssemblyName>
+        <RootNamespace>SetlistNet</RootNamespace>
+        <AssemblyVersion>2.0.1.0</AssemblyVersion>
+        <FileVersion>2.0.1.0</FileVersion>
+        <NeutralLanguage>en</NeutralLanguage>
+        <LangVersion>latestmajor</LangVersion>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="System.Text.Json" Version="9.0.1" />
-  </ItemGroup>
+    <PropertyGroup>
+        <Title>SetlistNet</Title>
+        <PackageVersion>2.0.1</PackageVersion>
+        <Authors>Konstantin Komarov</Authors>
+        <Description>C# library to interact with setlist.fm API. It's currently supports all methods listed in the API REST Endpoints section, such as Setlists Search or getting Artist by MBID</Description>
+        <Copyright>Konstantin Komarov, 2025</Copyright>
+        <PackageProjectUrl>https://github.com/MolinRE/SetlistNet</PackageProjectUrl>
+        <PackageLicense>https://github.com/MolinRE/SetlistNet/blob/main/LICENSE</PackageLicense>
+        <RepositoryUrl>https://github.com/MolinRE/SetlistNet</RepositoryUrl>
+        <RepositoryType>GitHub</RepositoryType>
+        <PackageTags>setlist.fm, setlist, concerts, shows, live</PackageTags>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageReleaseNotes>UserAgent fixed</PackageReleaseNotes>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="System.Text.Json" Version="9.0.1"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+    </ItemGroup>
+
 
 </Project>

@@ -1,0 +1,33 @@
+name: NuGet Publish
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  nuget-publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          source-url: https://api.nuget.org/v3/index.json
+          dotnet-version: 8.0.x
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.NUGET_TOKEN}}
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build src/SetlistNet/SetlistNet.csproj -c Release --no-restore
+      - name: Publish SetlistNet
+        run: |
+          mkdir out
+          dotnet pack src/SetlistNet/SetlistNet.csproj -c Release -o out --no-restore
+          dotnet nuget push "./out/*.nupkg" --skip-duplicate --no-symbols --api-key ${{secrets.NUGET_TOKEN}}
+          rm -rf out
