@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace SetlistNet.Converters;
+namespace SetlistNet.JsonConverters;
 
-public class DateTimeConverterUsingDateTimeParse : JsonConverter<DateTime>
+public class DateTimeConverter : JsonConverter<DateTime>
 {
     public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        Debug.Assert(typeToConvert == typeof(DateTime));
         var token = reader.GetString();
         if (string.IsNullOrEmpty(token))
         {

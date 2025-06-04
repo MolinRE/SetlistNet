@@ -1,5 +1,5 @@
-﻿using SetlistNet.Converters;
-using SetlistNet.Exceptions;
+﻿using SetlistNet.Exceptions;
+using SetlistNet.JsonConverters;
 using SetlistNet.Models;
 using SetlistNet.Models.ArrayResult;
 using SetlistNet.Models.Enum;
@@ -25,10 +25,11 @@ public class SetlistApi
         _httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
         _httpClient.DefaultRequestHeaders.Add("x-api-key", apiToken);
         _httpClient.DefaultRequestHeaders.Add("Accept-Language", desiredLanguage);
+        _httpClient.DefaultRequestHeaders.UserAgent.ParseAdd($"SetlistNet/2.1.0 ({apiToken})");
 
         _opts = new()
         {
-            Converters = { new DateTimeConverterUsingDateTimeParse() }
+            Converters = { new DateTimeConverter() }
         };
     }
 
@@ -38,10 +39,7 @@ public class SetlistApi
         return Load<Artist>($"/artist/{mbid}");
     }
 
-    public Task<City> City(int geoId)
-    {
-        return Load<City>($"/city/{geoId}");
-    }
+    public Task<City> City(int geoId) => Load<City>($"/city/{geoId}");
 
     public Task<City> City(string geoId)
     {
@@ -75,7 +73,7 @@ public class SetlistApi
 
         if (query.Length == 0)
         {
-            throw new NoSearchCriteriaSpecifiedException("Not Found: no search criteria specified");
+            throw new NoSearchCriteriaSpecifiedException();
         }
 
         query.AppendFormat("sort={0}", sort == ArtistSort.Name ? "sortName" : "relevance");
@@ -115,16 +113,13 @@ public class SetlistApi
 
         if (query.Length == 0)
         {
-            throw new NoSearchCriteriaSpecifiedException("Not Found: no search criteria specified");
+            throw new NoSearchCriteriaSpecifiedException();
         }
             
         return Load<Cities>($"/search/cities?{query}p={page}");
     }
 
-    public Task<Countries> SearchCountries()
-    {
-        return Load<Countries>("/search/countries");
-    }
+    public Task<Countries> SearchCountries() => Load<Countries>("/search/countries");
 
     /// <summary>
     /// Search for setlists
@@ -235,7 +230,7 @@ public class SetlistApi
 
         if (query.Length == 0)
         {
-            throw new NoSearchCriteriaSpecifiedException("Not Found: no search criteria specified");
+            throw new NoSearchCriteriaSpecifiedException();
         }
 
         return Load<Setlists>($"/search/setlists?{query}p={page}");
@@ -296,7 +291,7 @@ public class SetlistApi
 
         if (query.Length == 0)
         {
-            throw new NoSearchCriteriaSpecifiedException("Not Found: no search criteria specified");
+            throw new NoSearchCriteriaSpecifiedException();
         }
 
         return Load<Venues>($"/search/venues?{query}p={page.ToString()}");

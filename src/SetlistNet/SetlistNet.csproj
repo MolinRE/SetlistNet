@@ -4,8 +4,8 @@
         <TargetFramework>netstandard2.1</TargetFramework>
         <AssemblyName>SetlistNet</AssemblyName>
         <RootNamespace>SetlistNet</RootNamespace>
-        <AssemblyVersion>2.0.1.0</AssemblyVersion>
-        <FileVersion>2.0.1.0</FileVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+        <FileVersion>2.1.0.0</FileVersion>
         <NeutralLanguage>en</NeutralLanguage>
         <LangVersion>latestmajor</LangVersion>
         <Nullable>enable</Nullable>
@@ -13,7 +13,7 @@
 
     <PropertyGroup>
         <Title>SetlistNet</Title>
-        <PackageVersion>2.0.1</PackageVersion>
+        <PackageVersion>2.1.0</PackageVersion>
         <Authors>Konstantin Komarov</Authors>
         <Description>C# library to interact with setlist.fm API. It's currently supports all methods listed in the API REST Endpoints section, such as Setlists Search or getting Artist by MBID</Description>
         <Copyright>Konstantin Komarov, 2025</Copyright>
